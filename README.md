@@ -15,8 +15,7 @@
   <img src="https://img.shields.io/badge/TeX-latexmk%20%2B%20your%20TeX%20distribution-008080" alt="Uses your TeX distribution">
 </p>
 
-Verso for macOS is a native rewrite of [Verso](https://github.com/LeoB914/verso) by Leonard
-Becker, which is a cross-platform Electron app. This fork contains only the native version.
+Verso for macOS is a native rewrite of [Verso](https://github.com/LeoB914/verso) by LeoB914, which is a cross-platform Electron app. This fork contains only the native version.
 It has no web view and no Node runtime, and it uses the system's text system, PDFKit and
 FSEvents.
 
