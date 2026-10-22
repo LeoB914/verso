@@ -27,7 +27,8 @@ describe('project registry', () => {
 
   beforeEach(() => {
     memory.clear()
-    parent = realpathSync(mkdtempSync(join(tmpdir(), 'verso-registry-')))
+    // native: also expands Windows 8.3 short names, like fs.realpath in the app.
+    parent = realpathSync.native(mkdtempSync(join(tmpdir(), 'verso-registry-')))
     setHistoryBaseDir(mkdtempSync(join(tmpdir(), 'verso-registry-ud-')))
     project = join(parent, 'Thesis')
     mkdirSync(project)

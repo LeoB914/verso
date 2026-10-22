@@ -1,7 +1,7 @@
 {
   "name": "openleaf",
   "productName": "Verso",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Local, offline-first desktop LaTeX editor",
   "main": "./out/main/index.js",
   "type": "module",
@@ -33,7 +33,7 @@
     "verify:templates": "node scripts/verify-templates.mjs",
     "docs:shortcuts": "node scripts/generate-shortcuts.mjs",
     "icons": "electron-vite build && node scripts/generate-icons.mjs",
-    "dist": "electron-vite build && electron-builder"
+    "dist": "electron-vite build && electron-builder --publish never"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.83",

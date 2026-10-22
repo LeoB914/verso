@@ -28,13 +28,14 @@ describe('resolveInProject', () => {
 
   it('resolves simple relative paths', async () => {
     const result = await resolveInProject(root, 'main.tex')
-    // macOS /tmp is a symlink to /private/tmp, so compare realpaths.
-    expect(result).toBe(realpathSync(join(root, 'main.tex')))
+    // macOS /tmp is a symlink to /private/tmp, so compare realpaths. The native
+    // variant also expands Windows 8.3 short names (C:\Users\RUNNER~1).
+    expect(result).toBe(realpathSync.native(join(root, 'main.tex')))
   })
 
   it('resolves nested paths with ./ segments', async () => {
     const result = await resolveInProject(root, './sections/intro.tex')
-    expect(result).toBe(realpathSync(join(root, 'sections', 'intro.tex')))
+    expect(result).toBe(realpathSync.native(join(root, 'sections', 'intro.tex')))
   })
 
   it('rejects traversal outside the project', async () => {

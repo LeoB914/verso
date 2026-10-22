@@ -93,7 +93,8 @@ export function expandGlobs(
       if (!segment.includes('*')) {
         current = current.map((base) => {
           if (isWindows) return base.endsWith('\\') ? base + segment : base + '\\' + segment
-          return base ? path.join(base, segment) : path.join(path.sep, segment)
+          // POSIX paths keep '/' on every OS (path.join would use backslashes on Windows).
+          return base ? path.posix.join(base, segment) : '/' + segment
         })
         continue
       }
@@ -110,7 +111,7 @@ export function expandGlobs(
                   ? base.endsWith('\\')
                     ? base + entry
                     : base + '\\' + entry
-                  : path.join(base, entry)
+                  : path.posix.join(base, entry)
               )
             }
           }
