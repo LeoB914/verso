@@ -1,0 +1,7 @@
+{
+  "id": "letter",
+  "name": "Letter",
+  "description": "A simple business letter.",
+  "mainFile": "main.tex",
+  "compiler": "pdflatex"
+}

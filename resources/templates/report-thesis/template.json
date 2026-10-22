@@ -1,0 +1,7 @@
+{
+  "id": "report-thesis",
+  "name": "Report / Thesis",
+  "description": "Chapters in separate files, biblatex bibliography and a figures folder.",
+  "mainFile": "main.tex",
+  "compiler": "pdflatex"
+}

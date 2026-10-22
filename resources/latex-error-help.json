@@ -1,0 +1,212 @@
+[
+  {
+    "id": "undefined-control-sequence",
+    "pattern": "Undefined control sequence",
+    "title": "Undefined control sequence",
+    "explanation": "You used a command that LaTeX does not know — usually a typo, or a package that provides it was not loaded.",
+    "fix": "Check the spelling of the command. If it comes from a package, add the matching \\usepackage{...} to your preamble."
+  },
+  {
+    "id": "missing-dollar",
+    "pattern": "Missing \\$ inserted",
+    "title": "Missing $ inserted",
+    "explanation": "LaTeX found a math-only symbol (like _ or ^ or a Greek letter) outside of math mode.",
+    "fix": "Wrap the math parts in $...$ (or \\(...\\)), or escape a literal underscore with \\_."
+  },
+  {
+    "id": "missing-dollar-right",
+    "pattern": "Missing \\$ right",
+    "title": "Missing $ right",
+    "explanation": "LaTeX reached the end of a paragraph while still inside math mode opened with $.",
+    "fix": "Close the math with a matching $ on the same paragraph."
+  },
+  {
+    "id": "display-math-ends",
+    "pattern": "Display math should end with \\$\\$",
+    "title": "Display math should end with $$",
+    "explanation": "A $$...$$ block was not closed properly.",
+    "fix": "Make sure every $$ has a matching closing $$."
+  },
+  {
+    "id": "file-not-found",
+    "pattern": "File `([^']+)' not found|not found.*(\\.sty|\\.cls)",
+    "title": "File not found",
+    "explanation": "A file (package, class or image) could not be found.",
+    "fix": "Check the file name and path. If it is a package, install it with your TeX distribution’s package manager."
+  },
+  {
+    "id": "missing-begin-document",
+    "pattern": "Missing \\\\begin\\{document\\}|\\\\begin\\{document\\} missing",
+    "title": "Missing \\begin{document}",
+    "explanation": "LaTeX found text before \\begin{document}, or the document environment is missing.",
+    "fix": "Add \\begin{document} after the preamble (everything after \\documentclass)."
+  },
+  {
+    "id": "extra-alignment-tab",
+    "pattern": "Extra alignment tab",
+    "title": "Extra alignment tab has been changed to \\cr",
+    "explanation": "A table row has more & separators than columns defined in the tabular preamble.",
+    "fix": "Remove the extra & or add a column (l/c/r) to the tabular definition."
+  },
+  {
+    "id": "extra-alignment-tab-2",
+    "pattern": "Misplaced alignment tab character &",
+    "title": "Misplaced alignment tab &",
+    "explanation": "An & was used outside of a tabular or alignment environment.",
+    "fix": "Escape a literal ampersand as \\&, or move it into a tabular/align environment."
+  },
+  {
+    "id": "too-many-braces",
+    "pattern": "Too many \\}'s",
+    "title": "Too many }’s",
+    "explanation": "There is an unmatched closing brace }.",
+    "fix": "Remove the extra }, or add the matching opening brace {."
+  },
+  {
+    "id": "runaway-argument",
+    "pattern": "Runaway argument",
+    "title": "Runaway argument",
+    "explanation": "A command argument was not closed before the end of the file or paragraph — usually a missing }.",
+    "fix": "Look at the command in the error line and close its braces."
+  },
+  {
+    "id": "paragraph-ended",
+    "pattern": "Paragraph ended before .* was complete",
+    "title": "Paragraph ended before command was complete",
+    "explanation": "A command that must keep its argument in one paragraph hit a blank line.",
+    "fix": "Remove the blank line inside the command’s argument, or wrap the argument in braces."
+  },
+  {
+    "id": "undefined-reference",
+    "pattern": "Reference .* undefined|There were undefined references",
+    "title": "Reference undefined",
+    "explanation": "A \\ref points to a label that does not exist (or a second compile run is needed).",
+    "fix": "Check the label name for typos; run the compile again — LaTeX needs two passes for cross-references."
+  },
+  {
+    "id": "undefined-citation",
+    "pattern": "Citation .* undefined",
+    "title": "Citation undefined",
+    "explanation": "A \\cite key is not present in the bibliography, or BibTeX/Biber has not run yet.",
+    "fix": "Check the key in your .bib file and compile again (latexmk handles the bibliography passes)."
+  },
+  {
+    "id": "environment-undefined",
+    "pattern": "Environment .* undefined",
+    "title": "Environment undefined",
+    "explanation": "The \\begin{...} environment is not defined — often a missing package (e.g. align needs amsmath).",
+    "fix": "Load the package that provides the environment, e.g. \\usepackage{amsmath} for align."
+  },
+  {
+    "id": "no-bibdata",
+    "pattern": "no \\\\bibdata command|I found no \\\\",
+    "title": "Bibliography file problem",
+    "explanation": "BibTeX could not find a \\bibliography command or the .aux file is broken.",
+    "fix": "Make sure \\bibliography{...} or \\addbibresource{...} is present, and delete stale files in .openleaf/build, then recompile."
+  },
+  {
+    "id": "biber-missing",
+    "pattern": "Biber|biber",
+    "title": "Biber error",
+    "explanation": "Biber (the biblatex backend) reported an error or is not installed.",
+    "fix": "Read the Biber message above; if it is missing, install biber via your TeX distribution."
+  },
+  {
+    "id": "font-not-found",
+    "pattern": "Font \\\\[^=]+=[^ ]+ at|Font shape .* undefined|The font .* cannot be found",
+    "title": "Font problem",
+    "explanation": "The requested font is not installed or the name is wrong (common with XeLaTeX/LuaLaTeX and fontspec).",
+    "fix": "Check the font name with fc-list, install the font, or use a font that ships with TeX Live."
+  },
+  {
+    "id": "overfull-hbox",
+    "pattern": "Overfull \\\\hbox|Overfull \\\\[hv]box",
+    "title": "Overfull box",
+    "explanation": "A line (or box) is too wide and sticks into the margin — a warning, not an error.",
+    "fix": "Rephrase the sentence, allow a hyphenation point (\\-), or add \\sloppy."
+  },
+  {
+    "id": "underfull-hbox",
+    "pattern": "Underfull \\\\hbox|Underfull \\\\[hv]box",
+    "title": "Underfull box",
+    "explanation": "A line is too loosely spaced — usually caused by forced line breaks or \\\\ in text.",
+    "fix": "Usually harmless. Rewrite the sentence or remove the manual line break."
+  },
+  {
+    "id": "no-line-to-end",
+    "pattern": "no line here to end|There.s no line here to end",
+    "title": "No line here to end",
+    "explanation": "A \\\\ line break appears where no line exists (e.g. directly after \\begin{...}).",
+    "fix": "Remove the \\\\ or add content before it."
+  },
+  {
+    "id": "floats-lost",
+    "pattern": "Too many unprocessed floats",
+    "title": "Too many unprocessed floats",
+    "explanation": "Too many figures/tables were queued without being placed.",
+    "fix": "Add \\clearpage at a suitable spot, or place floats closer to their text."
+  },
+  {
+    "id": "option-clash",
+    "pattern": "Option clash for package",
+    "title": "Option clash for package",
+    "explanation": "The same package was loaded twice with different options.",
+    "fix": "Search your preamble (and loaded packages) for duplicated \\usepackage lines and merge the options."
+  },
+  {
+    "id": "command-already-defined",
+    "pattern": "Command .* already defined",
+    "title": "Command already defined",
+    "explanation": "A \\newcommand redefines an existing command.",
+    "fix": "Use \\renewcommand instead, or rename your command."
+  },
+  {
+    "id": "invalid-utf8",
+    "pattern": "Invalid UTF-8 byte|Unicode character .* not set up",
+    "title": "Encoding problem",
+    "explanation": "The file contains bytes that are not valid UTF-8, or a Unicode character has no LaTeX mapping.",
+    "fix": "Save the file as UTF-8 (Verso does this by default). For exotic symbols, use \\DeclareUnicodeCharacter or the symbol’s macro."
+  },
+  {
+    "id": "pdf-include-not-pdf",
+    "pattern": "Cannot determine size of graphic|not a PDF|Graphic .* not found|could not be imported",
+    "title": "Graphics problem",
+    "explanation": "An included graphic is missing, in the wrong format, or corrupted.",
+    "fix": "Check the file name in \\includegraphics and the file type (pdflatex supports .png/.jpg/.pdf)."
+  },
+  {
+    "id": "write-protected",
+    "pattern": "Permission denied|Trying to overwrite",
+    "title": "File permission problem",
+    "explanation": "LaTeX could not write a file — the folder may be read-only or the file locked by a viewer.",
+    "fix": "Close viewers that have the PDF open and check the folder’s write permissions."
+  },
+  {
+    "id": "emergency-stop",
+    "pattern": "Emergency stop|Fatal error occurred",
+    "title": "Emergency stop",
+    "explanation": "LaTeX aborted because of an earlier error, often a missing file or an interrupted prompt.",
+    "fix": "Fix the first error in the list, then recompile."
+  },
+  {
+    "id": "missing-inserted",
+    "pattern": "Missing (?:\\\\cr|\\\\right|\\\\endgroup|\\\\begin) inserted",
+    "title": "Missing structure inserted",
+    "explanation": "A math or alignment structure is incomplete (missing \\right, \\cr or \\end).",
+    "fix": "Complete the structure: close \\left...\\right pairs and environment bodies."
+  },
+  {
+    "id": "package-not-found",
+    "pattern": "Package .* not found|\\\\usepackage.*(?:not available)",
+    "title": "Package not found",
+    "explanation": "A package is not installed in your TeX distribution.",
+    "fix": "Install it with your TeX distribution’s package manager (see the command below)."
+  },
+  {
+    "id": "hyperref-note",
+    "pattern": "destination with the same identifier",
+    "title": "Duplicate PDF destination",
+    "explanation": "hyperref found two identical labels/names (e.g. two figures with the same caption id).",
+    "fix": "Make the labels unique — often a repeated \\label or duplicate section number."
+  }
+]

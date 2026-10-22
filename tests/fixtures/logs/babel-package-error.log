@@ -1,0 +1,8 @@
+This is e-pTeX, Version 3.141592653-1.40.25 (TeX Live 2024)
+(./main.tex
+
+! Package babel Error: Unknown option `frenchb'. Either you misspelled it
+(install-babel) or the language definition file frenchb.ldf was not found.
+
+Type <return> to continue.
+ l.8 \usepackage[frenchb]{babel}

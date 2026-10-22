@@ -1,0 +1,7 @@
+{
+  "id": "cv",
+  "name": "CV",
+  "description": "A simple curriculum vitae without external classes.",
+  "mainFile": "main.tex",
+  "compiler": "pdflatex"
+}

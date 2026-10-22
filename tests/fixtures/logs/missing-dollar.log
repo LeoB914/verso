@@ -1,0 +1,8 @@
+This is pdfTeX, Version 3.141592653-1.40.25 (TeX Live 2024)
+(./main.tex
+! Missing $ inserted.
+<inserted text> 
+                $
+l.15 Let $x be a variable.
+                          
+[1{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]

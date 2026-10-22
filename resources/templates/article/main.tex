@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\usepackage{hyperref}
+
+\addbibresource{references.bib}
+
+\title{A Clean Article}
+\author{My Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This template shows a modern article setup with sections, figures, tables and biblatex references.
+\end{abstract}
+
+\section{Introduction}
+Open with the motivation and the research question. Cite something like this \cite{knuth1984}.
+
+\section{Method}
+Describe what you did. Mathematics works inline like $x^2$ or displayed:
+\begin{equation}
+  \label{eq:main}
+  f(x) = \int_0^1 g(t)\,\mathrm{d}t
+\end{equation}
+
+\section{Results}
+\begin{figure}[ht]
+  \centering
+  % \includegraphics[width=0.8\linewidth]{figures/example}
+  \caption{An example figure. Drop images into the \texttt{figures/} folder.}
+  \label{fig:example}
+\end{figure}
+
+\begin{table}[ht]
+  \centering
+  \caption{An example table.}
+  \label{tab:example}
+  \begin{tabular}{lrr}
+    \toprule
+    Condition & Mean & SD \\
+    \midrule
+    A & 3.4 & 0.7 \\
+    B & 5.1 & 1.2 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Discussion}
+Refer back to Equation~\ref{eq:main}, Figure~\ref{fig:example} and Table~\ref{tab:example}.
+
+\printbibliography
+
+\end{document}

@@ -1,0 +1,7 @@
+{
+  "id": "beamer",
+  "name": "Beamer Presentation",
+  "description": "A slide deck with the Beamer class.",
+  "mainFile": "main.tex",
+  "compiler": "pdflatex"
+}

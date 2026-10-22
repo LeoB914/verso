@@ -1,0 +1,8 @@
+{
+  "mainFile": "main.tex",
+  "compiler": "pdflatex",
+  "shellEscape": false,
+  "spellLanguage": "en",
+  "autoCompile": false,
+  "spellEnabled": true
+}

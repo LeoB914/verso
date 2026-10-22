@@ -1,0 +1,7 @@
+{
+  "id": "sample-project",
+  "name": "Sample Project",
+  "description": "The 'Welcome to Verso' demo: sections, math, table, bibliography.",
+  "mainFile": "main.tex",
+  "compiler": "pdflatex"
+}

@@ -1,0 +1,35 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\newcommand{\entry}[2]{\textbf{#1} \hfill #2\par}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \textbf{My Name}}\\[2pt]
+  my.email@example.com $\cdot$ +49 000 000 0000 $\cdot$ mycity
+\end{center}
+
+\section*{Experience}
+\entry{Job Title, Company}{2020 -- today}
+\begin{itemize}[nosep]
+  \item What you did and achieved.
+\end{itemize}
+
+\section*{Education}
+\entry{M.Sc.\ Something, University}{2015 -- 2019}
+
+\section*{Skills}
+\begin{itemize}[nosep]
+  \item LaTeX, of course.
+\end{itemize}
+
+\end{document}

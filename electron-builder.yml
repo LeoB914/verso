@@ -1,0 +1,60 @@
+appId: dev.openleaf.app
+productName: Verso
+directories:
+  output: dist
+  buildResources: resources
+files:
+  - out/**
+  - resources/**/*
+  - package.json
+asar: true
+
+icon: resources/icon.icns
+
+mac:
+  category: public.app-category.productivity
+  target:
+    - target: dmg
+      arch: [arm64, x64]
+  darkModeSupport: true
+  hardenedRuntime: true
+  # Release builds are currently unsigned. Signing/notarization would be enabled
+  # via environment variables (CSC_LINK, CSC_KEY_PASSWORD, APPLE_ID,
+  # APPLE_APP_SPECIFIC_PASSWORD, APPLE_TEAM_ID); see docs/release.md.
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  fileAssociations:
+    - ext: tex
+      name: LaTeX document
+      role: Editor
+  extendInfo:
+    CFBundleDocumentTypes:
+      - CFBundleTypeExtensions: [tex]
+        CFBundleTypeName: LaTeX document
+        CFBundleTypeRole: Editor
+
+win:
+  icon: resources/icon.ico
+  target:
+    - target: nsis
+      arch: [x64, arm64]
+  fileAssociations:
+    - ext: tex
+      name: LaTeX document
+      description: LaTeX document
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+
+linux:
+  icon: resources/icons
+  # Required for the .deb (package.json has no author email).
+  maintainer: Leonard
+  category: Office
+  mimeTypes:
+    - application/x-tex
+  target:
+    - AppImage
+    - deb

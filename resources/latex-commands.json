@@ -1,0 +1,3551 @@
+{
+  "commands": [
+    {
+      "label": "\\documentclass",
+      "type": "function",
+      "detail": "Document class",
+      "apply": "\\documentclass{${1:article}}",
+      "snippet": true
+    },
+    {
+      "label": "\\usepackage",
+      "type": "function",
+      "detail": "Load a package",
+      "apply": "\\usepackage{${1:package}}",
+      "snippet": true
+    },
+    {
+      "label": "\\title",
+      "type": "function",
+      "detail": "Document title",
+      "apply": "\\title{${1:title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\author",
+      "type": "function",
+      "detail": "Document author",
+      "apply": "\\author{${1:author}}",
+      "snippet": true
+    },
+    {
+      "label": "\\date",
+      "type": "function",
+      "detail": "Document date",
+      "apply": "\\date{${1:\\today}}",
+      "snippet": true
+    },
+    {
+      "label": "\\maketitle",
+      "type": "function",
+      "detail": "Print the title",
+      "apply": "\\maketitle",
+      "snippet": false
+    },
+    {
+      "label": "\\tableofcontents",
+      "type": "function",
+      "detail": "Print table of contents",
+      "apply": "\\tableofcontents",
+      "snippet": false
+    },
+    {
+      "label": "\\listoffigures",
+      "type": "function",
+      "detail": "Print list of figures",
+      "apply": "\\listoffigures",
+      "snippet": false
+    },
+    {
+      "label": "\\listoftables",
+      "type": "function",
+      "detail": "Print list of tables",
+      "apply": "\\listoftables",
+      "snippet": false
+    },
+    {
+      "label": "\\newpage",
+      "type": "function",
+      "detail": "Start a new page",
+      "apply": "\\newpage",
+      "snippet": false
+    },
+    {
+      "label": "\\clearpage",
+      "type": "function",
+      "detail": "Flush floats and start a new page",
+      "apply": "\\clearpage",
+      "snippet": false
+    },
+    {
+      "label": "\\cleardoublepage",
+      "type": "function",
+      "detail": "New page, ensure odd page (twoside)",
+      "apply": "\\cleardoublepage",
+      "snippet": false
+    },
+    {
+      "label": "\\linebreak",
+      "type": "function",
+      "detail": "Force line break",
+      "apply": "\\linebreak",
+      "snippet": false
+    },
+    {
+      "label": "\\nolinebreak",
+      "type": "function",
+      "detail": "Prevent line break",
+      "apply": "\\nolinebreak",
+      "snippet": false
+    },
+    {
+      "label": "\\pagebreak",
+      "type": "function",
+      "detail": "Force page break",
+      "apply": "\\pagebreak",
+      "snippet": false
+    },
+    {
+      "label": "\\nopagebreak",
+      "type": "function",
+      "detail": "Prevent page break",
+      "apply": "\\nopagebreak",
+      "snippet": false
+    },
+    {
+      "label": "\\hyphenation",
+      "type": "function",
+      "detail": "Control hyphenation",
+      "apply": "\\hyphenation{${1:hy-phen-ation}}",
+      "snippet": true
+    },
+    {
+      "label": "\\footnote",
+      "type": "function",
+      "detail": "Footnote",
+      "apply": "\\footnote{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\item",
+      "type": "function",
+      "detail": "List item",
+      "apply": "\\item",
+      "snippet": false
+    },
+    {
+      "label": "\\item",
+      "type": "function",
+      "detail": "List item with custom label",
+      "apply": "\\item[${1:label}]",
+      "snippet": true
+    },
+    {
+      "label": "\\label",
+      "type": "function",
+      "detail": "Insert a label",
+      "apply": "\\label{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\ref",
+      "type": "function",
+      "detail": "Reference a label",
+      "apply": "\\ref{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\pageref",
+      "type": "function",
+      "detail": "Reference a page",
+      "apply": "\\pageref{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\eqref",
+      "type": "function",
+      "detail": "Reference an equation (amsmath)",
+      "apply": "\\eqref{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\cite",
+      "type": "function",
+      "detail": "Cite a bibliography entry",
+      "apply": "\\cite{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\bibliographystyle",
+      "type": "function",
+      "detail": "Bibliography style",
+      "apply": "\\bibliographystyle{${1:plain}}",
+      "snippet": true
+    },
+    {
+      "label": "\\bibliography",
+      "type": "function",
+      "detail": "Include bibliography",
+      "apply": "\\bibliography{${1:refs}}",
+      "snippet": true
+    },
+    {
+      "label": "\\printbibliography",
+      "type": "function",
+      "detail": "Print biblatex bibliography",
+      "apply": "\\printbibliography",
+      "snippet": false
+    },
+    {
+      "label": "\\input",
+      "type": "function",
+      "detail": "Inline another file",
+      "apply": "\\input{${1:file}}",
+      "snippet": true
+    },
+    {
+      "label": "\\include",
+      "type": "function",
+      "detail": "Include file with clearpage",
+      "apply": "\\include{${1:file}}",
+      "snippet": true
+    },
+    {
+      "label": "\\includeonly",
+      "type": "function",
+      "detail": "Restrict \\include files",
+      "apply": "\\includeonly{${1:file}}",
+      "snippet": true
+    },
+    {
+      "label": "\\subfile",
+      "type": "function",
+      "detail": "Include a subfile",
+      "apply": "\\subfile{${1:file}}",
+      "snippet": true
+    },
+    {
+      "label": "\\setcounter",
+      "type": "function",
+      "detail": "Set a counter",
+      "apply": "\\setcounter{${1:counter}}{${2:value}}",
+      "snippet": true
+    },
+    {
+      "label": "\\addtocounter",
+      "type": "function",
+      "detail": "Increment a counter",
+      "apply": "\\addtocounter{${1:counter}}{${2:value}}",
+      "snippet": true
+    },
+    {
+      "label": "\\newcommand",
+      "type": "function",
+      "detail": "Define a command",
+      "apply": "\\newcommand{\\${1:cmd}}{${2:def}}",
+      "snippet": true
+    },
+    {
+      "label": "\\newcommand",
+      "type": "function",
+      "detail": "Define a command with args",
+      "apply": "\\newcommand{\\${1:cmd}}[${2:1}]{${3:def}}",
+      "snippet": true
+    },
+    {
+      "label": "\\renewcommand",
+      "type": "function",
+      "detail": "Redefine a command",
+      "apply": "\\renewcommand{\\${1:cmd}}{${2:def}}",
+      "snippet": true
+    },
+    {
+      "label": "\\providecommand",
+      "type": "function",
+      "detail": "Define if undefined",
+      "apply": "\\providecommand{\\${1:cmd}}{${2:def}}",
+      "snippet": true
+    },
+    {
+      "label": "\\newenvironment",
+      "type": "function",
+      "detail": "Define an environment",
+      "apply": "\\newenvironment{${1:name}}{${2:begin}}{${3:end}}",
+      "snippet": true
+    },
+    {
+      "label": "\\renewenvironment",
+      "type": "function",
+      "detail": "Redefine an environment",
+      "apply": "\\renewenvironment{${1:name}}{${2:begin}}{${3:end}}",
+      "snippet": true
+    },
+    {
+      "label": "\\length",
+      "type": "function",
+      "detail": "Set a length",
+      "apply": "\\length{\\${1:len}}{${2:value}}",
+      "snippet": true
+    },
+    {
+      "label": "\\setlength",
+      "type": "function",
+      "detail": "Set a length",
+      "apply": "\\setlength{\\${1:len}}{${2:value}}",
+      "snippet": true
+    },
+    {
+      "label": "\\addtolength",
+      "type": "function",
+      "detail": "Add to a length",
+      "apply": "\\addtolength{\\${1:len}}{${2:value}}",
+      "snippet": true
+    },
+    {
+      "label": "\\newtheorem",
+      "type": "function",
+      "detail": "Define a theorem environment",
+      "apply": "\\newtheorem{${1:env}}{${2:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\numberwithin",
+      "type": "function",
+      "detail": "Number counter within another",
+      "apply": "\\numberwithin{${1:counter}}{${2:within}}",
+      "snippet": true
+    },
+    {
+      "label": "\\DeclareMathOperator",
+      "type": "function",
+      "detail": "Define a math operator",
+      "apply": "\\DeclareMathOperator{\\${1:op}}{${2:name}}",
+      "snippet": true
+    },
+    {
+      "label": "\\ensuremath",
+      "type": "function",
+      "detail": "Math in text or math mode",
+      "apply": "\\ensuremath{${1:math}}",
+      "snippet": true
+    },
+    {
+      "label": "\\renewcommand",
+      "type": "function",
+      "detail": "Stretch table rows",
+      "apply": "\\renewcommand{\\arraystretch}{${1:1.5}}",
+      "snippet": true
+    },
+    {
+      "label": "\\part",
+      "type": "function",
+      "detail": "Part",
+      "apply": "\\part{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\chapter",
+      "type": "function",
+      "detail": "Chapter (book/report)",
+      "apply": "\\chapter{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\section",
+      "type": "function",
+      "detail": "Section",
+      "apply": "\\section{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\subsection",
+      "type": "function",
+      "detail": "Subsection",
+      "apply": "\\subsection{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\subsubsection",
+      "type": "function",
+      "detail": "Subsubsection",
+      "apply": "\\subsubsection{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\paragraph",
+      "type": "function",
+      "detail": "Paragraph heading",
+      "apply": "\\paragraph{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\subparagraph",
+      "type": "function",
+      "detail": "Subparagraph heading",
+      "apply": "\\subparagraph{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textbf",
+      "type": "function",
+      "detail": "Bold text",
+      "apply": "\\textbf{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textit",
+      "type": "function",
+      "detail": "Italic text",
+      "apply": "\\textit{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\texttt",
+      "type": "function",
+      "detail": "Typewriter text",
+      "apply": "\\texttt{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textsc",
+      "type": "function",
+      "detail": "Small caps",
+      "apply": "\\textsc{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textsf",
+      "type": "function",
+      "detail": "Sans serif",
+      "apply": "\\textsf{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textrm",
+      "type": "function",
+      "detail": "Roman text",
+      "apply": "\\textrm{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textsl",
+      "type": "function",
+      "detail": "Slanted text",
+      "apply": "\\textsl{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textnormal",
+      "type": "function",
+      "detail": "Normal font",
+      "apply": "\\textnormal{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\underline",
+      "type": "function",
+      "detail": "Underline",
+      "apply": "\\underline{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\emph",
+      "type": "function",
+      "detail": "Emphasize",
+      "apply": "\\emph{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textsuperscript",
+      "type": "function",
+      "detail": "Superscript",
+      "apply": "\\textsuperscript{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textsubscript",
+      "type": "function",
+      "detail": "Subscript",
+      "apply": "\\textsubscript{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\uppercase",
+      "type": "function",
+      "detail": "Uppercase",
+      "apply": "\\uppercase{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\lowercase",
+      "type": "function",
+      "detail": "Lowercase",
+      "apply": "\\lowercase{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\texorpdfstring",
+      "type": "function",
+      "detail": "Different TeX/PDF (hyperref) strings",
+      "apply": "\\texorpdfstring{${1:TeX}}{${2:PDF}}",
+      "snippet": true
+    },
+    {
+      "label": "\\verb",
+      "type": "function",
+      "detail": "Inline verbatim",
+      "apply": "\\verb|${1:text}|",
+      "snippet": true
+    },
+    {
+      "label": "\\footnotemark",
+      "type": "function",
+      "detail": "Footnote mark without text",
+      "apply": "\\footnotemark",
+      "snippet": false
+    },
+    {
+      "label": "\\footnotetext",
+      "type": "function",
+      "detail": "Footnote text without mark",
+      "apply": "\\footnotetext{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\thanks",
+      "type": "function",
+      "detail": "Unnumbered footnote (title)",
+      "apply": "\\thanks{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\encl",
+      "type": "function",
+      "detail": "Letter: enclosure",
+      "apply": "\\encl",
+      "snippet": false
+    },
+    {
+      "label": "\\newline",
+      "type": "function",
+      "detail": "New line",
+      "apply": "\\newline",
+      "snippet": false
+    },
+    {
+      "label": "\\noindent",
+      "type": "function",
+      "detail": "Suppress paragraph indent",
+      "apply": "\\noindent",
+      "snippet": false
+    },
+    {
+      "label": "\\indent",
+      "type": "function",
+      "detail": "Force paragraph indent",
+      "apply": "\\indent",
+      "snippet": false
+    },
+    {
+      "label": "\\par",
+      "type": "function",
+      "detail": "Paragraph break",
+      "apply": "\\par",
+      "snippet": false
+    },
+    {
+      "label": "\\bigskip",
+      "type": "function",
+      "detail": "Vertical space",
+      "apply": "\\bigskip",
+      "snippet": false
+    },
+    {
+      "label": "\\medskip",
+      "type": "function",
+      "detail": "Medium vertical space",
+      "apply": "\\medskip",
+      "snippet": false
+    },
+    {
+      "label": "\\smallskip",
+      "type": "function",
+      "detail": "Small vertical space",
+      "apply": "\\smallskip",
+      "snippet": false
+    },
+    {
+      "label": "\\vspace",
+      "type": "function",
+      "detail": "Vertical space",
+      "apply": "\\vspace{${1:length}}",
+      "snippet": true
+    },
+    {
+      "label": "\\hspace",
+      "type": "function",
+      "detail": "Horizontal space",
+      "apply": "\\hspace{${1:length}}",
+      "snippet": true
+    },
+    {
+      "label": "\\phantom",
+      "type": "function",
+      "detail": "Invisible box with text size",
+      "apply": "\\phantom{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\vfill",
+      "type": "function",
+      "detail": "Stretchable vertical space",
+      "apply": "\\vfill",
+      "snippet": false
+    },
+    {
+      "label": "\\hfill",
+      "type": "function",
+      "detail": "Stretchable horizontal space",
+      "apply": "\\hfill",
+      "snippet": false
+    },
+    {
+      "label": "\\dotfill",
+      "type": "function",
+      "detail": "Dotted fill",
+      "apply": "\\dotfill",
+      "snippet": false
+    },
+    {
+      "label": "\\hrulefill",
+      "type": "function",
+      "detail": "Rule fill",
+      "apply": "\\hrulefill",
+      "snippet": false
+    },
+    {
+      "label": "\\fbox",
+      "type": "function",
+      "detail": "Framed box",
+      "apply": "\\fbox{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mbox",
+      "type": "function",
+      "detail": "Unbreakable box",
+      "apply": "\\mbox{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\parbox",
+      "type": "function",
+      "detail": "Paragraph box",
+      "apply": "\\parbox[${1:c}]{${2:width}}{${3:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\minipage",
+      "type": "function",
+      "detail": "Minipage environment start",
+      "apply": "\\minipage[${1:c}]{${2:width}}",
+      "snippet": true
+    },
+    {
+      "label": "\\raisebox",
+      "type": "function",
+      "detail": "Raise/lower text",
+      "apply": "\\raisebox{${1:lift}}{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\centering",
+      "type": "function",
+      "detail": "Center this block",
+      "apply": "\\centering",
+      "snippet": false
+    },
+    {
+      "label": "\\raggedright",
+      "type": "function",
+      "detail": "Left-align this block",
+      "apply": "\\raggedright",
+      "snippet": false
+    },
+    {
+      "label": "\\raggedleft",
+      "type": "function",
+      "detail": "Right-align this block",
+      "apply": "\\raggedleft",
+      "snippet": false
+    },
+    {
+      "label": "\\sloppy",
+      "type": "function",
+      "detail": "Allow looser line breaking",
+      "apply": "\\sloppy",
+      "snippet": false
+    },
+    {
+      "label": "\\fussy",
+      "type": "function",
+      "detail": "Strict line breaking",
+      "apply": "\\fussy",
+      "snippet": false
+    },
+    {
+      "label": "\\appendix",
+      "type": "function",
+      "detail": "Start appendix sections",
+      "apply": "\\appendix",
+      "snippet": false
+    },
+    {
+      "label": "\\frontmatter",
+      "type": "function",
+      "detail": "Book: front matter",
+      "apply": "\\frontmatter",
+      "snippet": false
+    },
+    {
+      "label": "\\mainmatter",
+      "type": "function",
+      "detail": "Book: main matter",
+      "apply": "\\mainmatter",
+      "snippet": false
+    },
+    {
+      "label": "\\backmatter",
+      "type": "function",
+      "detail": "Book: back matter",
+      "apply": "\\backmatter",
+      "snippet": false
+    },
+    {
+      "label": "\\frac",
+      "type": "function",
+      "detail": "Fraction",
+      "apply": "\\frac{${1:num}}{${2:den}}",
+      "snippet": true
+    },
+    {
+      "label": "\\dfrac",
+      "type": "function",
+      "detail": "Display-style fraction",
+      "apply": "\\dfrac{${1:num}}{${2:den}}",
+      "snippet": true
+    },
+    {
+      "label": "\\tfrac",
+      "type": "function",
+      "detail": "Text-style fraction",
+      "apply": "\\tfrac{${1:num}}{${2:den}}",
+      "snippet": true
+    },
+    {
+      "label": "\\sqrt",
+      "type": "function",
+      "detail": "Square root",
+      "apply": "\\sqrt{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\sqrt",
+      "type": "function",
+      "detail": "nth root",
+      "apply": "\\sqrt[${1:n}]{${2:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\sum",
+      "type": "function",
+      "detail": "Sum symbol",
+      "apply": "\\sum",
+      "snippet": false
+    },
+    {
+      "label": "\\prod",
+      "type": "function",
+      "detail": "Product symbol",
+      "apply": "\\prod",
+      "snippet": false
+    },
+    {
+      "label": "\\int",
+      "type": "function",
+      "detail": "Integral",
+      "apply": "\\int",
+      "snippet": false
+    },
+    {
+      "label": "\\iint",
+      "type": "function",
+      "detail": "Double integral (amsmath)",
+      "apply": "\\iint",
+      "snippet": false
+    },
+    {
+      "label": "\\iiint",
+      "type": "function",
+      "detail": "Triple integral (amsmath)",
+      "apply": "\\iiint",
+      "snippet": false
+    },
+    {
+      "label": "\\oint",
+      "type": "function",
+      "detail": "Contour integral",
+      "apply": "\\oint",
+      "snippet": false
+    },
+    {
+      "label": "\\bigcup",
+      "type": "function",
+      "detail": "Big union",
+      "apply": "\\bigcup",
+      "snippet": false
+    },
+    {
+      "label": "\\bigcap",
+      "type": "function",
+      "detail": "Big intersection",
+      "apply": "\\bigcap",
+      "snippet": false
+    },
+    {
+      "label": "\\bigoplus",
+      "type": "function",
+      "detail": "Big direct sum",
+      "apply": "\\bigoplus",
+      "snippet": false
+    },
+    {
+      "label": "\\bigotimes",
+      "type": "function",
+      "detail": "Big tensor product",
+      "apply": "\\bigotimes",
+      "snippet": false
+    },
+    { "label": "\\lim", "type": "function", "detail": "Limit", "apply": "\\lim", "snippet": false },
+    {
+      "label": "\\limsup",
+      "type": "function",
+      "detail": "Limit superior",
+      "apply": "\\limsup",
+      "snippet": false
+    },
+    {
+      "label": "\\liminf",
+      "type": "function",
+      "detail": "Limit inferior",
+      "apply": "\\liminf",
+      "snippet": false
+    },
+    {
+      "label": "\\max",
+      "type": "function",
+      "detail": "Maximum",
+      "apply": "\\max",
+      "snippet": false
+    },
+    {
+      "label": "\\min",
+      "type": "function",
+      "detail": "Minimum",
+      "apply": "\\min",
+      "snippet": false
+    },
+    {
+      "label": "\\sup",
+      "type": "function",
+      "detail": "Supremum",
+      "apply": "\\sup",
+      "snippet": false
+    },
+    {
+      "label": "\\inf",
+      "type": "function",
+      "detail": "Infimum",
+      "apply": "\\inf",
+      "snippet": false
+    },
+    { "label": "\\sin", "type": "function", "detail": "Sine", "apply": "\\sin", "snippet": false },
+    {
+      "label": "\\cos",
+      "type": "function",
+      "detail": "Cosine",
+      "apply": "\\cos",
+      "snippet": false
+    },
+    {
+      "label": "\\tan",
+      "type": "function",
+      "detail": "Tangent",
+      "apply": "\\tan",
+      "snippet": false
+    },
+    {
+      "label": "\\log",
+      "type": "function",
+      "detail": "Logarithm",
+      "apply": "\\log",
+      "snippet": false
+    },
+    {
+      "label": "\\ln",
+      "type": "function",
+      "detail": "Natural log",
+      "apply": "\\ln",
+      "snippet": false
+    },
+    {
+      "label": "\\exp",
+      "type": "function",
+      "detail": "Exponential",
+      "apply": "\\exp",
+      "snippet": false
+    },
+    {
+      "label": "\\left",
+      "type": "function",
+      "detail": "Auto-sized left delimiter",
+      "apply": "\\left",
+      "snippet": false
+    },
+    {
+      "label": "\\right",
+      "type": "function",
+      "detail": "Auto-sized right delimiter",
+      "apply": "\\right",
+      "snippet": false
+    },
+    {
+      "label": "\\left(",
+      "type": "function",
+      "detail": "Auto-sized parenthesis (left)",
+      "apply": "\\left(",
+      "snippet": false
+    },
+    {
+      "label": "\\right)",
+      "type": "function",
+      "detail": "Auto-sized parenthesis (right)",
+      "apply": "\\right)",
+      "snippet": false
+    },
+    {
+      "label": "\\left[",
+      "type": "function",
+      "detail": "Auto-sized bracket (left)",
+      "apply": "\\left[",
+      "snippet": false
+    },
+    {
+      "label": "\\right]",
+      "type": "function",
+      "detail": "Auto-sized bracket (right)",
+      "apply": "\\right]",
+      "snippet": false
+    },
+    {
+      "label": "\\left\\{",
+      "type": "function",
+      "detail": "Auto-sized brace (left)",
+      "apply": "\\left\\{",
+      "snippet": false
+    },
+    {
+      "label": "\\right\\}",
+      "type": "function",
+      "detail": "Auto-sized brace (right)",
+      "apply": "\\right\\}",
+      "snippet": false
+    },
+    {
+      "label": "\\left.",
+      "type": "function",
+      "detail": "Invisible left delimiter",
+      "apply": "\\left.",
+      "snippet": false
+    },
+    {
+      "label": "\\right.",
+      "type": "function",
+      "detail": "Invisible right delimiter",
+      "apply": "\\right.",
+      "snippet": false
+    },
+    {
+      "label": "\\overline",
+      "type": "function",
+      "detail": "Overline",
+      "apply": "\\overline{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\underline",
+      "type": "function",
+      "detail": "Underline (math)",
+      "apply": "\\underline{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\hat",
+      "type": "function",
+      "detail": "Hat accent",
+      "apply": "\\hat{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\bar",
+      "type": "function",
+      "detail": "Bar accent",
+      "apply": "\\bar{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\vec",
+      "type": "function",
+      "detail": "Vector arrow",
+      "apply": "\\vec{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\tilde",
+      "type": "function",
+      "detail": "Tilde accent",
+      "apply": "\\tilde{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\dot",
+      "type": "function",
+      "detail": "Dot accent",
+      "apply": "\\dot{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\ddot",
+      "type": "function",
+      "detail": "Double dot accent",
+      "apply": "\\ddot{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\widehat",
+      "type": "function",
+      "detail": "Wide hat",
+      "apply": "\\widehat{${1:xy}}",
+      "snippet": true
+    },
+    {
+      "label": "\\widetilde",
+      "type": "function",
+      "detail": "Wide tilde",
+      "apply": "\\widetilde{${1:xy}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathbf",
+      "type": "function",
+      "detail": "Bold math",
+      "apply": "\\mathbf{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathrm",
+      "type": "function",
+      "detail": "Roman math",
+      "apply": "\\mathrm{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathbb",
+      "type": "function",
+      "detail": "Blackboard bold (amssymb)",
+      "apply": "\\mathbb{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathcal",
+      "type": "function",
+      "detail": "Calligraphic",
+      "apply": "\\mathcal{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathfrak",
+      "type": "function",
+      "detail": "Fraktur (amssymb)",
+      "apply": "\\mathfrak{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathsf",
+      "type": "function",
+      "detail": "Sans math",
+      "apply": "\\mathsf{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathtt",
+      "type": "function",
+      "detail": "Typewriter math",
+      "apply": "\\mathtt{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\text",
+      "type": "function",
+      "detail": "Text in math (amsmath)",
+      "apply": "\\text{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\operatorname",
+      "type": "function",
+      "detail": "Custom operator name (amsmath)",
+      "apply": "\\operatorname{${1:op}}",
+      "snippet": true
+    },
+    {
+      "label": "\\boldsymbol",
+      "type": "function",
+      "detail": "Bold symbols incl. Greek",
+      "apply": "\\boldsymbol{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\binom",
+      "type": "function",
+      "detail": "Binomial coefficient (amsmath)",
+      "apply": "\\binom{${1:n}}{${2:k}}",
+      "snippet": true
+    },
+    {
+      "label": "\\genfrac",
+      "type": "function",
+      "detail": "Generalized fraction",
+      "apply": "\\genfrac{${1:l}}{${2:r}}{${3:t}}{${4:s}}{${5:n}}{${6:d}}",
+      "snippet": true
+    },
+    {
+      "label": "\\substack",
+      "type": "function",
+      "detail": "Stacked sub/superscripts",
+      "apply": "\\substack{${1:a \\ b}}",
+      "snippet": true
+    },
+    {
+      "label": "\\overset",
+      "type": "function",
+      "detail": "Set symbol above",
+      "apply": "\\overset{${1:top}}{${2:base}}",
+      "snippet": true
+    },
+    {
+      "label": "\\underset",
+      "type": "function",
+      "detail": "Set symbol below",
+      "apply": "\\underset{${1:bottom}}{${2:base}}",
+      "snippet": true
+    },
+    {
+      "label": "\\stackrel",
+      "type": "function",
+      "detail": "Relation with symbol above",
+      "apply": "\\stackrel{${1:top}}{${2:rel}}",
+      "snippet": true
+    },
+    {
+      "label": "\\notag",
+      "type": "function",
+      "detail": "Suppress equation number",
+      "apply": "\\notag",
+      "snippet": false
+    },
+    {
+      "label": "\\nonumber",
+      "type": "function",
+      "detail": "Suppress equation number",
+      "apply": "\\nonumber",
+      "snippet": false
+    },
+    {
+      "label": "\\tag",
+      "type": "function",
+      "detail": "Custom equation tag",
+      "apply": "\\tag{${1:label}}",
+      "snippet": true
+    },
+    {
+      "label": "\\intertext",
+      "type": "function",
+      "detail": "Text between aligned rows",
+      "apply": "\\intertext{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\displaystyle",
+      "type": "function",
+      "detail": "Display style in inline math",
+      "apply": "\\displaystyle",
+      "snippet": false
+    },
+    {
+      "label": "\\textstyle",
+      "type": "function",
+      "detail": "Text style in display math",
+      "apply": "\\textstyle",
+      "snippet": false
+    },
+    {
+      "label": "\\scriptstyle",
+      "type": "function",
+      "detail": "Script style",
+      "apply": "\\scriptstyle",
+      "snippet": false
+    },
+    {
+      "label": "\\quad",
+      "type": "function",
+      "detail": "Space of 1em",
+      "apply": "\\quad",
+      "snippet": false
+    },
+    {
+      "label": "\\qquad",
+      "type": "function",
+      "detail": "Space of 2em",
+      "apply": "\\qquad",
+      "snippet": false
+    },
+    {
+      "label": "\\forall",
+      "type": "function",
+      "detail": "For all",
+      "apply": "\\forall",
+      "snippet": false
+    },
+    {
+      "label": "\\exists",
+      "type": "function",
+      "detail": "There exists",
+      "apply": "\\exists",
+      "snippet": false
+    },
+    {
+      "label": "\\nexists",
+      "type": "function",
+      "detail": "There not exists (amssymb)",
+      "apply": "\\nexists",
+      "snippet": false
+    },
+    {
+      "label": "\\in",
+      "type": "function",
+      "detail": "Element of",
+      "apply": "\\in",
+      "snippet": false
+    },
+    {
+      "label": "\\notin",
+      "type": "function",
+      "detail": "Not element of",
+      "apply": "\\notin",
+      "snippet": false
+    },
+    {
+      "label": "\\ni",
+      "type": "function",
+      "detail": "Contains as member",
+      "apply": "\\ni",
+      "snippet": false
+    },
+    {
+      "label": "\\subset",
+      "type": "function",
+      "detail": "Subset",
+      "apply": "\\subset",
+      "snippet": false
+    },
+    {
+      "label": "\\subseteq",
+      "type": "function",
+      "detail": "Subset or equal",
+      "apply": "\\subseteq",
+      "snippet": false
+    },
+    {
+      "label": "\\supset",
+      "type": "function",
+      "detail": "Superset",
+      "apply": "\\supset",
+      "snippet": false
+    },
+    {
+      "label": "\\supseteq",
+      "type": "function",
+      "detail": "Superset or equal",
+      "apply": "\\supseteq",
+      "snippet": false
+    },
+    {
+      "label": "\\emptyset",
+      "type": "function",
+      "detail": "Empty set",
+      "apply": "\\emptyset",
+      "snippet": false
+    },
+    {
+      "label": "\\varnothing",
+      "type": "function",
+      "detail": "Empty set (amssymb)",
+      "apply": "\\varnothing",
+      "snippet": false
+    },
+    { "label": "\\cup", "type": "function", "detail": "Union", "apply": "\\cup", "snippet": false },
+    {
+      "label": "\\cap",
+      "type": "function",
+      "detail": "Intersection",
+      "apply": "\\cap",
+      "snippet": false
+    },
+    {
+      "label": "\\setminus",
+      "type": "function",
+      "detail": "Set difference",
+      "apply": "\\setminus",
+      "snippet": false
+    },
+    {
+      "label": "\\times",
+      "type": "function",
+      "detail": "Multiplication",
+      "apply": "\\times",
+      "snippet": false
+    },
+    {
+      "label": "\\div",
+      "type": "function",
+      "detail": "Division",
+      "apply": "\\div",
+      "snippet": false
+    },
+    {
+      "label": "\\pm",
+      "type": "function",
+      "detail": "Plus minus",
+      "apply": "\\pm",
+      "snippet": false
+    },
+    {
+      "label": "\\mp",
+      "type": "function",
+      "detail": "Minus plus",
+      "apply": "\\mp",
+      "snippet": false
+    },
+    {
+      "label": "\\cdot",
+      "type": "function",
+      "detail": "Center dot",
+      "apply": "\\cdot",
+      "snippet": false
+    },
+    {
+      "label": "\\cdots",
+      "type": "function",
+      "detail": "Center ellipsis",
+      "apply": "\\cdots",
+      "snippet": false
+    },
+    {
+      "label": "\\ldots",
+      "type": "function",
+      "detail": "Baseline ellipsis",
+      "apply": "\\ldots",
+      "snippet": false
+    },
+    {
+      "label": "\\vdots",
+      "type": "function",
+      "detail": "Vertical ellipsis",
+      "apply": "\\vdots",
+      "snippet": false
+    },
+    {
+      "label": "\\ddots",
+      "type": "function",
+      "detail": "Diagonal ellipsis",
+      "apply": "\\ddots",
+      "snippet": false
+    },
+    {
+      "label": "\\equiv",
+      "type": "function",
+      "detail": "Equivalent",
+      "apply": "\\equiv",
+      "snippet": false
+    },
+    {
+      "label": "\\approx",
+      "type": "function",
+      "detail": "Approximately",
+      "apply": "\\approx",
+      "snippet": false
+    },
+    {
+      "label": "\\sim",
+      "type": "function",
+      "detail": "Similar",
+      "apply": "\\sim",
+      "snippet": false
+    },
+    {
+      "label": "\\simeq",
+      "type": "function",
+      "detail": "Similar or equal",
+      "apply": "\\simeq",
+      "snippet": false
+    },
+    {
+      "label": "\\cong",
+      "type": "function",
+      "detail": "Congruent",
+      "apply": "\\cong",
+      "snippet": false
+    },
+    {
+      "label": "\\neq",
+      "type": "function",
+      "detail": "Not equal",
+      "apply": "\\neq",
+      "snippet": false
+    },
+    {
+      "label": "\\leq",
+      "type": "function",
+      "detail": "Less or equal",
+      "apply": "\\leq",
+      "snippet": false
+    },
+    {
+      "label": "\\geq",
+      "type": "function",
+      "detail": "Greater or equal",
+      "apply": "\\geq",
+      "snippet": false
+    },
+    {
+      "label": "\\ll",
+      "type": "function",
+      "detail": "Much less",
+      "apply": "\\ll",
+      "snippet": false
+    },
+    {
+      "label": "\\gg",
+      "type": "function",
+      "detail": "Much greater",
+      "apply": "\\gg",
+      "snippet": false
+    },
+    {
+      "label": "\\prec",
+      "type": "function",
+      "detail": "Precedes",
+      "apply": "\\prec",
+      "snippet": false
+    },
+    {
+      "label": "\\succ",
+      "type": "function",
+      "detail": "Succeeds",
+      "apply": "\\succ",
+      "snippet": false
+    },
+    {
+      "label": "\\propto",
+      "type": "function",
+      "detail": "Proportional to",
+      "apply": "\\propto",
+      "snippet": false
+    },
+    {
+      "label": "\\perp",
+      "type": "function",
+      "detail": "Perpendicular",
+      "apply": "\\perp",
+      "snippet": false
+    },
+    {
+      "label": "\\parallel",
+      "type": "function",
+      "detail": "Parallel",
+      "apply": "\\parallel",
+      "snippet": false
+    },
+    {
+      "label": "\\angle",
+      "type": "function",
+      "detail": "Angle",
+      "apply": "\\angle",
+      "snippet": false
+    },
+    {
+      "label": "\\triangle",
+      "type": "function",
+      "detail": "Triangle",
+      "apply": "\\triangle",
+      "snippet": false
+    },
+    {
+      "label": "\\square",
+      "type": "function",
+      "detail": "Square (amssymb)",
+      "apply": "\\square",
+      "snippet": false
+    },
+    {
+      "label": "\\circ",
+      "type": "function",
+      "detail": "Composition",
+      "apply": "\\circ",
+      "snippet": false
+    },
+    {
+      "label": "\\bullet",
+      "type": "function",
+      "detail": "Bullet",
+      "apply": "\\bullet",
+      "snippet": false
+    },
+    {
+      "label": "\\star",
+      "type": "function",
+      "detail": "Star operator",
+      "apply": "\\star",
+      "snippet": false
+    },
+    {
+      "label": "\\oplus",
+      "type": "function",
+      "detail": "Circled plus",
+      "apply": "\\oplus",
+      "snippet": false
+    },
+    {
+      "label": "\\ominus",
+      "type": "function",
+      "detail": "Circled minus",
+      "apply": "\\ominus",
+      "snippet": false
+    },
+    {
+      "label": "\\otimes",
+      "type": "function",
+      "detail": "Circled times",
+      "apply": "\\otimes",
+      "snippet": false
+    },
+    {
+      "label": "\\odot",
+      "type": "function",
+      "detail": "Circled dot",
+      "apply": "\\odot",
+      "snippet": false
+    },
+    {
+      "label": "\\dagger",
+      "type": "function",
+      "detail": "Dagger",
+      "apply": "\\dagger",
+      "snippet": false
+    },
+    {
+      "label": "\\ddagger",
+      "type": "function",
+      "detail": "Double dagger",
+      "apply": "\\ddagger",
+      "snippet": false
+    },
+    {
+      "label": "\\infty",
+      "type": "function",
+      "detail": "Infinity",
+      "apply": "\\infty",
+      "snippet": false
+    },
+    {
+      "label": "\\partial",
+      "type": "function",
+      "detail": "Partial derivative",
+      "apply": "\\partial",
+      "snippet": false
+    },
+    {
+      "label": "\\nabla",
+      "type": "function",
+      "detail": "Nabla",
+      "apply": "\\nabla",
+      "snippet": false
+    },
+    {
+      "label": "\\hbar",
+      "type": "function",
+      "detail": "h-bar",
+      "apply": "\\hbar",
+      "snippet": false
+    },
+    {
+      "label": "\\ell",
+      "type": "function",
+      "detail": "Script lowercase l",
+      "apply": "\\ell",
+      "snippet": false
+    },
+    {
+      "label": "\\Re",
+      "type": "function",
+      "detail": "Real part",
+      "apply": "\\Re",
+      "snippet": false
+    },
+    {
+      "label": "\\Im",
+      "type": "function",
+      "detail": "Imaginary part",
+      "apply": "\\Im",
+      "snippet": false
+    },
+    {
+      "label": "\\aleph",
+      "type": "function",
+      "detail": "Aleph",
+      "apply": "\\aleph",
+      "snippet": false
+    },
+    {
+      "label": "\\wp",
+      "type": "function",
+      "detail": "Weierstrass p",
+      "apply": "\\wp",
+      "snippet": false
+    },
+    {
+      "label": "\\prime",
+      "type": "function",
+      "detail": "Prime",
+      "apply": "\\prime",
+      "snippet": false
+    },
+    {
+      "label": "\\circledast",
+      "type": "function",
+      "detail": "Circled asterisk",
+      "apply": "\\circledast",
+      "snippet": false
+    },
+    {
+      "label": "\\to",
+      "type": "function",
+      "detail": "Right arrow (→)",
+      "apply": "\\to",
+      "snippet": false
+    },
+    {
+      "label": "\\gets",
+      "type": "function",
+      "detail": "Left arrow",
+      "apply": "\\gets",
+      "snippet": false
+    },
+    {
+      "label": "\\leftrightarrow",
+      "type": "function",
+      "detail": "Left-right arrow",
+      "apply": "\\leftrightarrow",
+      "snippet": false
+    },
+    {
+      "label": "\\Rightarrow",
+      "type": "function",
+      "detail": "Double right arrow",
+      "apply": "\\Rightarrow",
+      "snippet": false
+    },
+    {
+      "label": "\\Leftarrow",
+      "type": "function",
+      "detail": "Double left arrow",
+      "apply": "\\Leftarrow",
+      "snippet": false
+    },
+    {
+      "label": "\\Leftrightarrow",
+      "type": "function",
+      "detail": "Double left-right arrow",
+      "apply": "\\Leftrightarrow",
+      "snippet": false
+    },
+    {
+      "label": "\\mapsto",
+      "type": "function",
+      "detail": "Maps to",
+      "apply": "\\mapsto",
+      "snippet": false
+    },
+    {
+      "label": "\\rightarrowtail",
+      "type": "function",
+      "detail": "Injective arrow",
+      "apply": "\\rightarrowtail",
+      "snippet": false
+    },
+    {
+      "label": "\\uparrow",
+      "type": "function",
+      "detail": "Up arrow",
+      "apply": "\\uparrow",
+      "snippet": false
+    },
+    {
+      "label": "\\downarrow",
+      "type": "function",
+      "detail": "Down arrow",
+      "apply": "\\downarrow",
+      "snippet": false
+    },
+    {
+      "label": "\\nearrow",
+      "type": "function",
+      "detail": "NE arrow",
+      "apply": "\\nearrow",
+      "snippet": false
+    },
+    {
+      "label": "\\searrow",
+      "type": "function",
+      "detail": "SE arrow",
+      "apply": "\\searrow",
+      "snippet": false
+    },
+    {
+      "label": "\\leadsto",
+      "type": "function",
+      "detail": "Squiggly arrow",
+      "apply": "\\leadsto",
+      "snippet": false
+    },
+    {
+      "label": "\\cdotp",
+      "type": "function",
+      "detail": "Center dot (punctuation)",
+      "apply": "\\cdotp",
+      "snippet": false
+    },
+    {
+      "label": "\\colon",
+      "type": "function",
+      "detail": "Colon (as relation)",
+      "apply": "\\colon",
+      "snippet": false
+    },
+    {
+      "label": "\\deg",
+      "type": "function",
+      "detail": "Degrees",
+      "apply": "\\deg",
+      "snippet": false
+    },
+    {
+      "label": "\\label",
+      "type": "function",
+      "detail": "Label (also in math)",
+      "apply": "\\label",
+      "snippet": false
+    },
+    {
+      "label": "\\allowdisplaybreaks",
+      "type": "function",
+      "detail": "Allow page breaks in display math",
+      "apply": "\\allowdisplaybreaks",
+      "snippet": false
+    },
+    {
+      "label": "\\numberwithin",
+      "type": "function",
+      "detail": "Number equations within sections",
+      "apply": "\\numberwithin{${1:eqn}}{${2:section}}",
+      "snippet": true
+    },
+    {
+      "label": "\\mathstrut",
+      "type": "function",
+      "detail": "Invisible strut",
+      "apply": "\\mathstrut",
+      "snippet": false
+    },
+    {
+      "label": "\\smash",
+      "type": "function",
+      "detail": "Typeset without height",
+      "apply": "\\smash{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\phantom",
+      "type": "function",
+      "detail": "Phantom box",
+      "apply": "\\phantom{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\hphantom",
+      "type": "function",
+      "detail": "Horizontal phantom",
+      "apply": "\\hphantom{${1:x}}",
+      "snippet": true
+    },
+    {
+      "label": "\\vphantom",
+      "type": "function",
+      "detail": "Vertical phantom",
+      "apply": "\\vphantom{${1:x}}",
+      "snippet": true
+    },
+    { "label": "\\alpha", "type": "function", "detail": "α", "apply": "\\alpha", "snippet": false },
+    { "label": "\\beta", "type": "function", "detail": "β", "apply": "\\beta", "snippet": false },
+    { "label": "\\gamma", "type": "function", "detail": "γ", "apply": "\\gamma", "snippet": false },
+    { "label": "\\delta", "type": "function", "detail": "δ", "apply": "\\delta", "snippet": false },
+    {
+      "label": "\\epsilon",
+      "type": "function",
+      "detail": "ε",
+      "apply": "\\epsilon",
+      "snippet": false
+    },
+    {
+      "label": "\\varepsilon",
+      "type": "function",
+      "detail": "ε (variant)",
+      "apply": "\\varepsilon",
+      "snippet": false
+    },
+    { "label": "\\zeta", "type": "function", "detail": "ζ", "apply": "\\zeta", "snippet": false },
+    { "label": "\\eta", "type": "function", "detail": "η", "apply": "\\eta", "snippet": false },
+    { "label": "\\theta", "type": "function", "detail": "θ", "apply": "\\theta", "snippet": false },
+    {
+      "label": "\\vartheta",
+      "type": "function",
+      "detail": "θ (variant)",
+      "apply": "\\vartheta",
+      "snippet": false
+    },
+    { "label": "\\iota", "type": "function", "detail": "ι", "apply": "\\iota", "snippet": false },
+    { "label": "\\kappa", "type": "function", "detail": "κ", "apply": "\\kappa", "snippet": false },
+    {
+      "label": "\\lambda",
+      "type": "function",
+      "detail": "λ",
+      "apply": "\\lambda",
+      "snippet": false
+    },
+    { "label": "\\mu", "type": "function", "detail": "μ", "apply": "\\mu", "snippet": false },
+    { "label": "\\nu", "type": "function", "detail": "ν", "apply": "\\nu", "snippet": false },
+    { "label": "\\xi", "type": "function", "detail": "ξ", "apply": "\\xi", "snippet": false },
+    { "label": "\\pi", "type": "function", "detail": "π", "apply": "\\pi", "snippet": false },
+    {
+      "label": "\\varpi",
+      "type": "function",
+      "detail": "π (variant)",
+      "apply": "\\varpi",
+      "snippet": false
+    },
+    { "label": "\\rho", "type": "function", "detail": "ρ", "apply": "\\rho", "snippet": false },
+    {
+      "label": "\\varrho",
+      "type": "function",
+      "detail": "ρ (variant)",
+      "apply": "\\varrho",
+      "snippet": false
+    },
+    { "label": "\\sigma", "type": "function", "detail": "σ", "apply": "\\sigma", "snippet": false },
+    {
+      "label": "\\varsigma",
+      "type": "function",
+      "detail": "ς",
+      "apply": "\\varsigma",
+      "snippet": false
+    },
+    { "label": "\\tau", "type": "function", "detail": "τ", "apply": "\\tau", "snippet": false },
+    {
+      "label": "\\upsilon",
+      "type": "function",
+      "detail": "υ",
+      "apply": "\\upsilon",
+      "snippet": false
+    },
+    { "label": "\\phi", "type": "function", "detail": "φ", "apply": "\\phi", "snippet": false },
+    {
+      "label": "\\varphi",
+      "type": "function",
+      "detail": "φ (variant)",
+      "apply": "\\varphi",
+      "snippet": false
+    },
+    { "label": "\\chi", "type": "function", "detail": "χ", "apply": "\\chi", "snippet": false },
+    { "label": "\\psi", "type": "function", "detail": "ψ", "apply": "\\psi", "snippet": false },
+    { "label": "\\omega", "type": "function", "detail": "ω", "apply": "\\omega", "snippet": false },
+    { "label": "\\Gamma", "type": "function", "detail": "Γ", "apply": "\\Gamma", "snippet": false },
+    { "label": "\\Delta", "type": "function", "detail": "Δ", "apply": "\\Delta", "snippet": false },
+    { "label": "\\Theta", "type": "function", "detail": "Θ", "apply": "\\Theta", "snippet": false },
+    {
+      "label": "\\Lambda",
+      "type": "function",
+      "detail": "Λ",
+      "apply": "\\Lambda",
+      "snippet": false
+    },
+    { "label": "\\Xi", "type": "function", "detail": "Ξ", "apply": "\\Xi", "snippet": false },
+    { "label": "\\Pi", "type": "function", "detail": "Π", "apply": "\\Pi", "snippet": false },
+    { "label": "\\Sigma", "type": "function", "detail": "Σ", "apply": "\\Sigma", "snippet": false },
+    {
+      "label": "\\Upsilon",
+      "type": "function",
+      "detail": "Υ",
+      "apply": "\\Upsilon",
+      "snippet": false
+    },
+    { "label": "\\Phi", "type": "function", "detail": "Φ", "apply": "\\Phi", "snippet": false },
+    { "label": "\\Psi", "type": "function", "detail": "Ψ", "apply": "\\Psi", "snippet": false },
+    { "label": "\\Omega", "type": "function", "detail": "Ω", "apply": "\\Omega", "snippet": false },
+    {
+      "label": "\\textcolor",
+      "type": "function",
+      "detail": "Colored text (xcolor)",
+      "apply": "\\textcolor{${1:red}}{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\color",
+      "type": "function",
+      "detail": "Set current color",
+      "apply": "\\color{${1:red}}",
+      "snippet": true
+    },
+    {
+      "label": "\\colorbox",
+      "type": "function",
+      "detail": "Colored box behind text",
+      "apply": "\\colorbox{${1:red}}{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\fcolorbox",
+      "type": "function",
+      "detail": "Framed colored box",
+      "apply": "\\fcolorbox{${1:frame}}{${2:bg}}{${3:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\definecolor",
+      "type": "function",
+      "detail": "Define a color",
+      "apply": "\\definecolor{${1:name}}{${2:HTML}}{${3:FF0000}}",
+      "snippet": true
+    },
+    {
+      "label": "\\pagecolor",
+      "type": "function",
+      "detail": "Page background color",
+      "apply": "\\pagecolor{${1:white}}",
+      "snippet": true
+    },
+    {
+      "label": "\\si",
+      "type": "function",
+      "detail": "Format a unit (siunitx)",
+      "apply": "\\si{${1:\\kilo\\meter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\SI",
+      "type": "function",
+      "detail": "Format value + unit (siunitx)",
+      "apply": "\\SI{${1:10}}{${2:\\kilo\\meter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\num",
+      "type": "function",
+      "detail": "Format a number",
+      "apply": "\\num{${1:12345.678}}",
+      "snippet": true
+    },
+    {
+      "label": "\\qty",
+      "type": "function",
+      "detail": "Quantity (siunitx v3)",
+      "apply": "\\qty{${1:10}}{${2:\\meter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\SIrange",
+      "type": "function",
+      "detail": "Range with unit",
+      "apply": "\\SIrange{${1:10}}{${2:20}}{${3:\\meter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\ang",
+      "type": "function",
+      "detail": "Angle (siunitx)",
+      "apply": "\\ang{${1:45}}",
+      "snippet": true
+    },
+    {
+      "label": "\\numprint",
+      "type": "function",
+      "detail": "Print number with separators",
+      "apply": "\\numprint{${1:1234.5}}",
+      "snippet": true
+    },
+    {
+      "label": "\\algorithm",
+      "type": "function",
+      "apply": "\\algorithmAlgorithm environment (algorithms)",
+      "snippet": false
+    },
+    {
+      "label": "\\procedure",
+      "type": "function",
+      "apply": "\\procedureProcedure (algorithmicx)",
+      "snippet": false
+    },
+    {
+      "label": "\\If",
+      "type": "function",
+      "detail": "Algorithmic if",
+      "apply": "\\If{${1:cond}}",
+      "snippet": true
+    },
+    {
+      "label": "\\ElsIf",
+      "type": "function",
+      "detail": "Algorithmic else-if",
+      "apply": "\\ElsIf{${1:cond}}",
+      "snippet": true
+    },
+    {
+      "label": "\\Else",
+      "type": "function",
+      "detail": "Algorithmic else",
+      "apply": "\\Else",
+      "snippet": false
+    },
+    {
+      "label": "\\EndIf",
+      "type": "function",
+      "detail": "Algorithmic end if",
+      "apply": "\\EndIf",
+      "snippet": false
+    },
+    {
+      "label": "\\For",
+      "type": "function",
+      "detail": "Algorithmic for",
+      "apply": "\\For{${1:range}}",
+      "snippet": true
+    },
+    {
+      "label": "\\EndFor",
+      "type": "function",
+      "detail": "Algorithmic end for",
+      "apply": "\\EndFor",
+      "snippet": false
+    },
+    {
+      "label": "\\While",
+      "type": "function",
+      "detail": "Algorithmic while",
+      "apply": "\\While{${1:cond}}",
+      "snippet": true
+    },
+    {
+      "label": "\\EndWhile",
+      "type": "function",
+      "detail": "Algorithmic end while",
+      "apply": "\\EndWhile",
+      "snippet": false
+    },
+    {
+      "label": "\\Function",
+      "type": "function",
+      "detail": "Algorithmic function",
+      "apply": "\\Function{${1:name}}",
+      "snippet": true
+    },
+    {
+      "label": "\\State",
+      "type": "function",
+      "detail": "Algorithmic state",
+      "apply": "\\State{${1:statement}}",
+      "snippet": true
+    },
+    {
+      "label": "\\Comment",
+      "type": "function",
+      "detail": "Algorithmic comment",
+      "apply": "\\Comment{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\Return",
+      "type": "function",
+      "detail": "Algorithmic return",
+      "apply": "\\Return",
+      "snippet": false
+    },
+    {
+      "label": "\\footref",
+      "type": "function",
+      "detail": "Reference a footnote",
+      "apply": "\\footref{${1:marker}}",
+      "snippet": true
+    },
+    {
+      "label": "\\nameref",
+      "type": "function",
+      "detail": "Reference section name",
+      "apply": "\\nameref{${1:label}}",
+      "snippet": true
+    },
+    {
+      "label": "\\eqref",
+      "type": "function",
+      "detail": "Equation reference",
+      "apply": "\\eqref",
+      "snippet": false
+    },
+    {
+      "label": "\\labelcref",
+      "type": "function",
+      "detail": "cref label only",
+      "apply": "\\labelcref{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\cpageref",
+      "type": "function",
+      "detail": "Page ref (cleveref)",
+      "apply": "\\cpageref{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\label",
+      "type": "function",
+      "detail": "unused",
+      "apply": "\\label[${1:prefix}]",
+      "snippet": true
+    },
+    {
+      "label": "\\crefrange",
+      "type": "function",
+      "detail": "Reference a range (cleveref)",
+      "apply": "\\crefrange{${1:from}}{${2:to}}",
+      "snippet": true
+    },
+    {
+      "label": "\\stepcounter",
+      "type": "function",
+      "detail": "Step a counter",
+      "apply": "\\stepcounter{${1:counter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\refstepcounter",
+      "type": "function",
+      "detail": "Step counter for refs",
+      "apply": "\\refstepcounter{${1:counter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\value",
+      "type": "function",
+      "detail": "Counter value",
+      "apply": "\\value{${1:counter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\arabic",
+      "type": "function",
+      "detail": "Arabic counter",
+      "apply": "\\arabic{${1:counter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\roman",
+      "type": "function",
+      "detail": "Roman counter",
+      "apply": "\\roman{${1:counter}}",
+      "snippet": true
+    },
+    {
+      "label": "\\thepage",
+      "type": "function",
+      "detail": "Current page number",
+      "apply": "\\thepage",
+      "snippet": false
+    },
+    {
+      "label": "\\thefootnote",
+      "type": "function",
+      "detail": "Current footnote number",
+      "apply": "\\thefootnote",
+      "snippet": false
+    },
+    {
+      "label": "\\protect",
+      "type": "function",
+      "detail": "Protect fragile command",
+      "apply": "\\protect",
+      "snippet": false
+    },
+    {
+      "label": "\\string",
+      "type": "function",
+      "detail": "Detokenize a macro",
+      "apply": "\\string",
+      "snippet": false
+    },
+    {
+      "label": "\\csname",
+      "type": "function",
+      "detail": "Construct command name",
+      "apply": "\\csname",
+      "snippet": false
+    },
+    {
+      "label": "\\expandafter",
+      "type": "function",
+      "detail": "Expansion control",
+      "apply": "\\expandafter",
+      "snippet": false
+    },
+    {
+      "label": "\\noexpand",
+      "type": "function",
+      "detail": "Prevent expansion",
+      "apply": "\\noexpand",
+      "snippet": false
+    },
+    {
+      "label": "\\typeout",
+      "type": "function",
+      "detail": "Print to console",
+      "apply": "\\typeout{${1:message}}",
+      "snippet": true
+    },
+    {
+      "label": "\\typein",
+      "type": "function",
+      "detail": "Read from terminal",
+      "apply": "\\typein",
+      "snippet": false
+    },
+    {
+      "label": "\\message",
+      "type": "function",
+      "detail": "Package message",
+      "apply": "\\message{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\PackageError",
+      "type": "function",
+      "detail": "Package error",
+      "apply": "\\PackageError{${1:pkg}}{${2:msg}}{${3:hint}}",
+      "snippet": true
+    },
+    {
+      "label": "\\PackageWarning",
+      "type": "function",
+      "detail": "Package warning",
+      "apply": "\\PackageWarning{${1:pkg}}{${2:msg}}",
+      "snippet": true
+    },
+    {
+      "label": "\\IfFileExists",
+      "type": "function",
+      "detail": "Conditional file check",
+      "apply": "\\IfFileExists{${1:file}}{${2:then}}{${3:else}}",
+      "snippet": true
+    },
+    {
+      "label": "\\addcontentsline",
+      "type": "function",
+      "detail": "Add to TOC",
+      "apply": "\\addcontentsline{${1:toc}}{${2:section}}{${3:title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\addtocontents",
+      "type": "function",
+      "detail": "Add raw content to TOC file",
+      "apply": "\\addtocontents{${1:toc}}{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\numberline",
+      "type": "function",
+      "detail": "TOC number box",
+      "apply": "\\numberline{${1:n}}",
+      "snippet": true
+    },
+    {
+      "label": "\\markboth",
+      "type": "function",
+      "detail": "Page headers",
+      "apply": "\\markboth{${1:left}}{${2:right}}",
+      "snippet": true
+    },
+    {
+      "label": "\\markright",
+      "type": "function",
+      "detail": "Page header (right)",
+      "apply": "\\markright{${1:right}}",
+      "snippet": true
+    },
+    {
+      "label": "\\thispagestyle",
+      "type": "function",
+      "detail": "Page style for current page",
+      "apply": "\\thispagestyle{${1:empty}}",
+      "snippet": true
+    },
+    {
+      "label": "\\pagestyle",
+      "type": "function",
+      "detail": "Page style",
+      "apply": "\\pagestyle{${1:plain}}",
+      "snippet": true
+    },
+    {
+      "label": "\\pagenumbering",
+      "type": "function",
+      "detail": "Page numbering style",
+      "apply": "\\pagenumbering{${1:roman}}",
+      "snippet": true
+    },
+    {
+      "label": "\\setcounter",
+      "type": "function",
+      "detail": "Numbering depth",
+      "apply": "\\setcounter{${1:secnumdepth}}{${2:3}}",
+      "snippet": true
+    },
+    {
+      "label": "\\baselineskip",
+      "type": "function",
+      "detail": "Line spacing register",
+      "apply": "\\baselineskip",
+      "snippet": false
+    },
+    {
+      "label": "\\parskip",
+      "type": "function",
+      "detail": "Paragraph skip register",
+      "apply": "\\parskip",
+      "snippet": false
+    },
+    {
+      "label": "\\columnsep",
+      "type": "function",
+      "detail": "Column separation",
+      "apply": "\\columnsep",
+      "snippet": false
+    },
+    {
+      "label": "\\tabcolsep",
+      "type": "function",
+      "detail": "Column padding in tables",
+      "apply": "\\tabcolsep",
+      "snippet": false
+    },
+    {
+      "label": "\\arraystretch",
+      "type": "function",
+      "detail": "Row stretch factor",
+      "apply": "\\arraystretch",
+      "snippet": false
+    },
+    {
+      "label": "\\arrayrulewidth",
+      "type": "function",
+      "detail": "Rule width",
+      "apply": "\\arrayrulewidth",
+      "snippet": false
+    },
+    {
+      "label": "\\fboxrule",
+      "type": "function",
+      "detail": "Frame rule width",
+      "apply": "\\fboxrule",
+      "snippet": false
+    },
+    {
+      "label": "\\fboxsep",
+      "type": "function",
+      "detail": "Frame padding",
+      "apply": "\\fboxsep",
+      "snippet": false
+    },
+    {
+      "label": "\\paperheight",
+      "type": "function",
+      "detail": "Paper height length",
+      "apply": "\\paperheight",
+      "snippet": false
+    },
+    {
+      "label": "\\paperwidth",
+      "type": "function",
+      "detail": "Paper width length",
+      "apply": "\\paperwidth",
+      "snippet": false
+    },
+    {
+      "label": "\\textwidth",
+      "type": "function",
+      "detail": "Text width length",
+      "apply": "\\textwidth",
+      "snippet": false
+    },
+    {
+      "label": "\\textheight",
+      "type": "function",
+      "detail": "Text height length",
+      "apply": "\\textheight",
+      "snippet": false
+    },
+    {
+      "label": "\\linewidth",
+      "type": "function",
+      "detail": "Current line width",
+      "apply": "\\linewidth",
+      "snippet": false
+    },
+    {
+      "label": "\\columnwidth",
+      "type": "function",
+      "detail": "Current column width",
+      "apply": "\\columnwidth",
+      "snippet": false
+    },
+    {
+      "label": "\\baselinestretch",
+      "type": "function",
+      "detail": "Line stretch factor",
+      "apply": "\\baselinestretch",
+      "snippet": false
+    },
+    {
+      "label": "\\unitlength",
+      "type": "function",
+      "detail": "Picture unit length",
+      "apply": "\\unitlength",
+      "snippet": false
+    },
+    {
+      "label": "\\headheight",
+      "type": "function",
+      "detail": "Header height",
+      "apply": "\\headheight",
+      "snippet": false
+    },
+    {
+      "label": "\\footskip",
+      "type": "function",
+      "detail": "Footer skip",
+      "apply": "\\footskip",
+      "snippet": false
+    },
+    {
+      "label": "\\topmargin",
+      "type": "function",
+      "detail": "Top margin",
+      "apply": "\\topmargin",
+      "snippet": false
+    },
+    {
+      "label": "\\evensidemargin",
+      "type": "function",
+      "detail": "Even page margin",
+      "apply": "\\evensidemargin",
+      "snippet": false
+    },
+    {
+      "label": "\\oddsidemargin",
+      "type": "function",
+      "detail": "Odd page margin",
+      "apply": "\\oddsidemargin",
+      "snippet": false
+    },
+    {
+      "label": "\\marginpar",
+      "type": "function",
+      "detail": "Margin note",
+      "apply": "\\marginpar{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\reversemarginpar",
+      "type": "function",
+      "detail": "Margin notes on other side",
+      "apply": "\\reversemarginpar",
+      "snippet": false
+    },
+    {
+      "label": "\\caption",
+      "type": "function",
+      "detail": "Caption (inside float)",
+      "apply": "\\caption{${1:Caption}}",
+      "snippet": true
+    },
+    {
+      "label": "\\captionof",
+      "type": "function",
+      "detail": "Caption outside float",
+      "apply": "\\captionof{${1:figure}}{${2:Caption}}",
+      "snippet": true
+    },
+    {
+      "label": "\\shortcaption",
+      "type": "function",
+      "detail": "unused",
+      "apply": "\\shortcaption",
+      "snippet": false
+    },
+    {
+      "label": "\\subcaption",
+      "type": "function",
+      "detail": "Sub-caption (subcaption pkg)",
+      "apply": "\\subcaption{${1:Caption}}",
+      "snippet": true
+    },
+    {
+      "label": "\\subfloat",
+      "type": "function",
+      "detail": "Sub-float",
+      "apply": "\\subfloat[${1:caption}]{${2:content}}",
+      "snippet": true
+    },
+    {
+      "label": "\\multirow",
+      "type": "function",
+      "detail": "Span rows in table",
+      "apply": "\\multirow{${1:rows}}{${2:width}}{${3:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\multicolumn",
+      "type": "function",
+      "detail": "Span columns in table",
+      "apply": "\\multicolumn{${1:cols}}{${2:align}}{${3:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\hline",
+      "type": "function",
+      "detail": "Horizontal table rule",
+      "apply": "\\hline",
+      "snippet": false
+    },
+    {
+      "label": "\\cline",
+      "type": "function",
+      "detail": "Partial horizontal rule",
+      "apply": "\\cline{${1:2-3}}",
+      "snippet": true
+    },
+    {
+      "label": "\\vline",
+      "type": "function",
+      "detail": "Vertical table rule",
+      "apply": "\\vline",
+      "snippet": false
+    },
+    {
+      "label": "\\hdashline",
+      "type": "function",
+      "detail": "Dashed rule (arydshln)",
+      "apply": "\\hdashline",
+      "snippet": false
+    },
+    {
+      "label": "\\tabularnewline",
+      "type": "function",
+      "detail": "End tabular row",
+      "apply": "\\tabularnewline",
+      "snippet": false
+    },
+    {
+      "label": "\\raggedcolumns",
+      "type": "function",
+      "detail": "Beamer: ragged columns",
+      "apply": "\\raggedcolumns",
+      "snippet": false
+    },
+    {
+      "label": "\\column",
+      "type": "function",
+      "detail": "Beamer column",
+      "apply": "\\column{${1:0.5\\textwidth}}",
+      "snippet": true
+    },
+    {
+      "label": "\\citep",
+      "type": "function",
+      "detail": "unused",
+      "apply": "\\citep",
+      "snippet": false
+    },
+    {
+      "label": "\\includegraphics",
+      "type": "function",
+      "detail": "Insert an image",
+      "apply": "\\includegraphics[${1:width=0.8\\textwidth}]{${2:fig.png}}",
+      "snippet": true
+    },
+    {
+      "label": "\\graphicspath",
+      "type": "function",
+      "detail": "Image search paths",
+      "apply": "\\graphicspath{{${1:figures/}}}",
+      "snippet": true
+    },
+    {
+      "label": "\\rotatebox",
+      "type": "function",
+      "detail": "Rotate content",
+      "apply": "\\rotatebox{${1:angle}}{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\scalebox",
+      "type": "function",
+      "detail": "Scale content",
+      "apply": "\\scalebox{${1:factor}}{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\resizebox",
+      "type": "function",
+      "detail": "Resize content",
+      "apply": "\\resizebox{${1:width}}{${2:height}}{${3:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\reflectbox",
+      "type": "function",
+      "detail": "Mirror content",
+      "apply": "\\reflectbox{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\totalheight",
+      "type": "function",
+      "detail": "Total height unit key",
+      "apply": "\\totalheight",
+      "snippet": false
+    },
+    {
+      "label": "\\height",
+      "type": "function",
+      "detail": "Height unit key",
+      "apply": "\\height",
+      "snippet": false
+    },
+    {
+      "label": "\\width",
+      "type": "function",
+      "detail": "Width unit key",
+      "apply": "\\width",
+      "snippet": false
+    },
+    {
+      "label": "\\depth",
+      "type": "function",
+      "detail": "Depth unit key",
+      "apply": "\\depth",
+      "snippet": false
+    },
+    {
+      "label": "\\href",
+      "type": "function",
+      "detail": "External hyperlink",
+      "apply": "\\href{${1:url}}{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\url",
+      "type": "function",
+      "detail": "Typeset URL",
+      "apply": "\\url{${1:url}}",
+      "snippet": true
+    },
+    {
+      "label": "\\nolinkurl",
+      "type": "function",
+      "detail": "URL without link",
+      "apply": "\\nolinkurl{${1:url}}",
+      "snippet": true
+    },
+    {
+      "label": "\\hyperref",
+      "type": "function",
+      "detail": "Hyperlink with options",
+      "apply": "\\hyperref[${1:options}]{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\hypersetup",
+      "type": "function",
+      "detail": "Configure hyperref",
+      "apply": "\\hypersetup{${1:pdftitle={Title}}}",
+      "snippet": true
+    },
+    {
+      "label": "\\autoref",
+      "type": "function",
+      "detail": "Reference with auto name",
+      "apply": "\\autoref{${1:label}}",
+      "snippet": true
+    },
+    {
+      "label": "\\texorpdfstring",
+      "type": "function",
+      "detail": "Different strings in TeX/PDF",
+      "apply": "\\texorpdfstring",
+      "snippet": false
+    },
+    {
+      "label": "\\pdfinfo",
+      "type": "function",
+      "detail": "PDF metadata",
+      "apply": "\\pdfinfo",
+      "snippet": false
+    },
+    {
+      "label": "\\citep",
+      "type": "function",
+      "detail": "Parenthetical cite (natbib)",
+      "apply": "\\citep{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\citet",
+      "type": "function",
+      "detail": "Textual cite (natbib)",
+      "apply": "\\citet{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\citealt",
+      "type": "function",
+      "detail": "Cite without parens (natbib)",
+      "apply": "\\citealt{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\citeauthor",
+      "type": "function",
+      "detail": "Cite author only",
+      "apply": "\\citeauthor{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\citeyear",
+      "type": "function",
+      "detail": "Cite year only",
+      "apply": "\\citeyear{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\parencite",
+      "type": "function",
+      "detail": "Parenthetical cite (biblatex)",
+      "apply": "\\parencite{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\textcite",
+      "type": "function",
+      "detail": "Textual cite (biblatex)",
+      "apply": "\\textcite{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\footcite",
+      "type": "function",
+      "detail": "Footnote cite (biblatex)",
+      "apply": "\\footcite{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\autocite",
+      "type": "function",
+      "detail": "Auto-styled cite (biblatex)",
+      "apply": "\\autocite{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\citereset",
+      "type": "function",
+      "detail": "Reset cite tracker (biblatex)",
+      "apply": "\\citereset",
+      "snippet": false
+    },
+    {
+      "label": "\\addbibresource",
+      "type": "function",
+      "detail": "Register biblatex resource",
+      "apply": "\\addbibresource{${1:refs.bib}}",
+      "snippet": true
+    },
+    {
+      "label": "\\printbibliography",
+      "type": "function",
+      "detail": "Print bibliography",
+      "apply": "\\printbibliography[${1:heading=bibintoc}]",
+      "snippet": true
+    },
+    {
+      "label": "\\fullcite",
+      "type": "function",
+      "detail": "Full citation in text",
+      "apply": "\\fullcite{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\nocite",
+      "type": "function",
+      "detail": "Cite without in-text marker",
+      "apply": "\\nocite{${1:key}}",
+      "snippet": true
+    },
+    {
+      "label": "\\toprule",
+      "type": "function",
+      "detail": "Table top rule",
+      "apply": "\\toprule",
+      "snippet": false
+    },
+    {
+      "label": "\\midrule",
+      "type": "function",
+      "detail": "Table middle rule",
+      "apply": "\\midrule",
+      "snippet": false
+    },
+    {
+      "label": "\\bottomrule",
+      "type": "function",
+      "detail": "Table bottom rule",
+      "apply": "\\bottomrule",
+      "snippet": false
+    },
+    {
+      "label": "\\cmidrule",
+      "type": "function",
+      "detail": "Partial rule",
+      "apply": "\\cmidrule{${1:lr}{2-3}}",
+      "snippet": true
+    },
+    {
+      "label": "\\addlinespace",
+      "type": "function",
+      "detail": "Extra row space",
+      "apply": "\\addlinespace",
+      "snippet": false
+    },
+    {
+      "label": "\\specialrule",
+      "type": "function",
+      "detail": "Rule with custom weight",
+      "apply": "\\specialrule{${1:w}}{${2:a}}{${3:b}}",
+      "snippet": true
+    },
+    {
+      "label": "\\numberwithin",
+      "type": "function",
+      "detail": "unused",
+      "apply": "\\numberwithin",
+      "snippet": false
+    },
+    {
+      "label": "\\draw",
+      "type": "function",
+      "detail": "TikZ: draw",
+      "apply": "\\draw",
+      "snippet": false
+    },
+    {
+      "label": "\\fill",
+      "type": "function",
+      "detail": "TikZ: fill",
+      "apply": "\\fill",
+      "snippet": false
+    },
+    {
+      "label": "\\node",
+      "type": "function",
+      "detail": "TikZ: node",
+      "apply": "\\node[${1:pos}] {${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\path",
+      "type": "function",
+      "detail": "TikZ: path",
+      "apply": "\\path",
+      "snippet": false
+    },
+    {
+      "label": "\\shade",
+      "type": "function",
+      "detail": "TikZ: shade",
+      "apply": "\\shade",
+      "snippet": false
+    },
+    {
+      "label": "\\clip",
+      "type": "function",
+      "detail": "TikZ: clip",
+      "apply": "\\clip",
+      "snippet": false
+    },
+    {
+      "label": "\\usetikzlibrary",
+      "type": "function",
+      "detail": "Load TikZ library",
+      "apply": "\\usetikzlibrary{${1:arrows.meta}}",
+      "snippet": true
+    },
+    {
+      "label": "\\tikzset",
+      "type": "function",
+      "detail": "Set TikZ styles",
+      "apply": "\\tikzset{${1:style/.style={${2:key=value}}}}",
+      "snippet": true
+    },
+    {
+      "label": "\\begin",
+      "type": "function",
+      "detail": "TikZ scope",
+      "apply": "\\begin{scope}[${1:shift={(1,1)}}]",
+      "snippet": true
+    },
+    {
+      "label": "\\frametitle",
+      "type": "function",
+      "detail": "Beamer frame title",
+      "apply": "\\frametitle{${1:Title}}",
+      "snippet": true
+    },
+    {
+      "label": "\\framesubtitle",
+      "type": "function",
+      "detail": "Beamer frame subtitle",
+      "apply": "\\framesubtitle{${1:Subtitle}}",
+      "snippet": true
+    },
+    {
+      "label": "\\pause",
+      "type": "function",
+      "detail": "Beamer: pause",
+      "apply": "\\pause",
+      "snippet": false
+    },
+    {
+      "label": "\\onslide",
+      "type": "function",
+      "detail": "Beamer: onslide",
+      "apply": "\\onslide<${1:2}->{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\only",
+      "type": "function",
+      "detail": "Beamer: only",
+      "apply": "\\only<${1:2}>{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\visible",
+      "type": "function",
+      "detail": "Beamer: visible",
+      "apply": "\\visible<${1:2}->{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\invisible",
+      "type": "function",
+      "detail": "Beamer: invisible",
+      "apply": "\\invisible<${1:2}>{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\alert",
+      "type": "function",
+      "detail": "Beamer: alert",
+      "apply": "\\alert<${1:2}>{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\uncover",
+      "type": "function",
+      "detail": "Beamer: uncover",
+      "apply": "\\uncover<${1:2}>{${2:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\usetheme",
+      "type": "function",
+      "detail": "Beamer theme",
+      "apply": "\\usetheme{${1:default}}",
+      "snippet": true
+    },
+    {
+      "label": "\\titlepage",
+      "type": "function",
+      "detail": "Beamer title page",
+      "apply": "\\titlepage",
+      "snippet": false
+    },
+    {
+      "label": "\\logo",
+      "type": "function",
+      "detail": "Beamer logo",
+      "apply": "\\logo{${1:text}}",
+      "snippet": true
+    },
+    {
+      "label": "\\lstset",
+      "type": "function",
+      "detail": "Configure listings",
+      "apply": "\\lstset{${1:language=Python}}",
+      "snippet": true
+    },
+    {
+      "label": "\\lstinputlisting",
+      "type": "function",
+      "detail": "Include code file",
+      "apply": "\\lstinputlisting{${1:file.py}}",
+      "snippet": true
+    },
+    {
+      "label": "\\lstinline",
+      "type": "function",
+      "detail": "Inline code",
+      "apply": "\\lstinline|${1:code}|",
+      "snippet": true
+    },
+    {
+      "label": "\\selectfont",
+      "type": "function",
+      "detail": "Apply font changes",
+      "apply": "\\selectfont",
+      "snippet": false
+    },
+    {
+      "label": "\\fontencoding",
+      "type": "function",
+      "detail": "Font encoding",
+      "apply": "\\fontencoding{${1:T1}}",
+      "snippet": true
+    },
+    {
+      "label": "\\fontfamily",
+      "type": "function",
+      "detail": "Font family",
+      "apply": "\\fontfamily{${1:ptm}}",
+      "snippet": true
+    },
+    {
+      "label": "\\fontseries",
+      "type": "function",
+      "detail": "Font series",
+      "apply": "\\fontseries{${1:b}}",
+      "snippet": true
+    },
+    {
+      "label": "\\fontshape",
+      "type": "function",
+      "detail": "Font shape",
+      "apply": "\\fontshape{${1:it}}",
+      "snippet": true
+    },
+    {
+      "label": "\\fontsize",
+      "type": "function",
+      "detail": "Font size",
+      "apply": "\\fontsize{${1:12}}{${2:14}}",
+      "snippet": true
+    },
+    {
+      "label": "\\tiny",
+      "type": "function",
+      "detail": "Tiny font",
+      "apply": "\\tiny",
+      "snippet": false
+    },
+    {
+      "label": "\\scriptsize",
+      "type": "function",
+      "detail": "Script size",
+      "apply": "\\scriptsize",
+      "snippet": false
+    },
+    {
+      "label": "\\footnotesize",
+      "type": "function",
+      "detail": "Footnote size",
+      "apply": "\\footnotesize",
+      "snippet": false
+    },
+    {
+      "label": "\\small",
+      "type": "function",
+      "detail": "Small font",
+      "apply": "\\small",
+      "snippet": false
+    },
+    {
+      "label": "\\normalsize",
+      "type": "function",
+      "detail": "Normal size",
+      "apply": "\\normalsize",
+      "snippet": false
+    },
+    {
+      "label": "\\large",
+      "type": "function",
+      "detail": "Large",
+      "apply": "\\large",
+      "snippet": false
+    },
+    {
+      "label": "\\Large",
+      "type": "function",
+      "detail": "Larger",
+      "apply": "\\Large",
+      "snippet": false
+    },
+    {
+      "label": "\\LARGE",
+      "type": "function",
+      "detail": "Even larger",
+      "apply": "\\LARGE",
+      "snippet": false
+    },
+    {
+      "label": "\\huge",
+      "type": "function",
+      "detail": "Huge",
+      "apply": "\\huge",
+      "snippet": false
+    },
+    {
+      "label": "\\Huge",
+      "type": "function",
+      "detail": "Huger",
+      "apply": "\\Huge",
+      "snippet": false
+    },
+    {
+      "label": "\\itshape",
+      "type": "function",
+      "detail": "Italic shape",
+      "apply": "\\itshape",
+      "snippet": false
+    },
+    {
+      "label": "\\bfseries",
+      "type": "function",
+      "detail": "Bold series",
+      "apply": "\\bfseries",
+      "snippet": false
+    },
+    {
+      "label": "\\ttfamily",
+      "type": "function",
+      "detail": "Typewriter family",
+      "apply": "\\ttfamily",
+      "snippet": false
+    },
+    {
+      "label": "\\sffamily",
+      "type": "function",
+      "detail": "Sans family",
+      "apply": "\\sffamily",
+      "snippet": false
+    },
+    {
+      "label": "\\rmfamily",
+      "type": "function",
+      "detail": "Roman family",
+      "apply": "\\rmfamily",
+      "snippet": false
+    },
+    {
+      "label": "\\scshape",
+      "type": "function",
+      "detail": "Small caps shape",
+      "apply": "\\scshape",
+      "snippet": false
+    },
+    {
+      "label": "\\upshape",
+      "type": "function",
+      "detail": "Upright shape",
+      "apply": "\\upshape",
+      "snippet": false
+    },
+    {
+      "label": "\\LaTeX",
+      "type": "function",
+      "detail": "LaTeX logo",
+      "apply": "\\LaTeX",
+      "snippet": false
+    },
+    {
+      "label": "\\TeX",
+      "type": "function",
+      "detail": "TeX logo",
+      "apply": "\\TeX",
+      "snippet": false
+    },
+    {
+      "label": "\\LaTeXe",
+      "type": "function",
+      "detail": "LaTeX2e logo",
+      "apply": "\\LaTeXe",
+      "snippet": false
+    },
+    {
+      "label": "\\today",
+      "type": "function",
+      "detail": "Today’s date",
+      "apply": "\\today",
+      "snippet": false
+    },
+    {
+      "label": "\\dots",
+      "type": "function",
+      "detail": "Dots",
+      "apply": "\\dots",
+      "snippet": false
+    },
+    {
+      "label": "\\pounds",
+      "type": "function",
+      "detail": "Pound sign",
+      "apply": "\\pounds",
+      "snippet": false
+    },
+    {
+      "label": "\\euro",
+      "type": "function",
+      "detail": "Euro sign (textcomp)",
+      "apply": "\\euro",
+      "snippet": false
+    },
+    {
+      "label": "\\textbullet",
+      "type": "function",
+      "detail": "Bullet",
+      "apply": "\\textbullet",
+      "snippet": false
+    },
+    {
+      "label": "\\textendash",
+      "type": "function",
+      "detail": "En dash",
+      "apply": "\\textendash",
+      "snippet": false
+    },
+    {
+      "label": "\\textemdash",
+      "type": "function",
+      "detail": "Em dash",
+      "apply": "\\textemdash",
+      "snippet": false
+    },
+    {
+      "label": "\\textquotedblleft",
+      "type": "function",
+      "detail": "Left double quote",
+      "apply": "\\textquotedblleft",
+      "snippet": false
+    },
+    {
+      "label": "\\textquotedblright",
+      "type": "function",
+      "detail": "Right double quote",
+      "apply": "\\textquotedblright",
+      "snippet": false
+    },
+    {
+      "label": "\\textquoteleft",
+      "type": "function",
+      "detail": "Left single quote",
+      "apply": "\\textquoteleft",
+      "snippet": false
+    },
+    {
+      "label": "\\textquoteright",
+      "type": "function",
+      "detail": "Right single quote",
+      "apply": "\\textquoteright",
+      "snippet": false
+    },
+    {
+      "label": "\\textbackslash",
+      "type": "function",
+      "detail": "Backslash",
+      "apply": "\\textbackslash",
+      "snippet": false
+    },
+    {
+      "label": "\\textbar",
+      "type": "function",
+      "detail": "Vertical bar",
+      "apply": "\\textbar",
+      "snippet": false
+    },
+    {
+      "label": "\\textasciitilde",
+      "type": "function",
+      "detail": "Tilde",
+      "apply": "\\textasciitilde",
+      "snippet": false
+    },
+    {
+      "label": "\\textasciicircum",
+      "type": "function",
+      "detail": "Circumflex",
+      "apply": "\\textasciicircum",
+      "snippet": false
+    },
+    {
+      "label": "\\textunderscore",
+      "type": "function",
+      "detail": "Underscore",
+      "apply": "\\textunderscore",
+      "snippet": false
+    },
+    {
+      "label": "\\textdegree",
+      "type": "function",
+      "detail": "Degree sign",
+      "apply": "\\textdegree",
+      "snippet": false
+    },
+    {
+      "label": "\\S",
+      "type": "function",
+      "detail": "Section sign",
+      "apply": "\\S",
+      "snippet": false
+    },
+    { "label": "\\P", "type": "function", "detail": "Pilcrow", "apply": "\\P", "snippet": false },
+    {
+      "label": "\\dag",
+      "type": "function",
+      "detail": "Dagger (text)",
+      "apply": "\\dag",
+      "snippet": false
+    },
+    {
+      "label": "\\copyright",
+      "type": "function",
+      "detail": "Copyright",
+      "apply": "\\copyright",
+      "snippet": false
+    },
+    {
+      "label": "\\textregistered",
+      "type": "function",
+      "detail": "Registered trademark",
+      "apply": "\\textregistered",
+      "snippet": false
+    },
+    {
+      "label": "\\texttrademark",
+      "type": "function",
+      "detail": "Trademark",
+      "apply": "\\texttrademark",
+      "snippet": false
+    },
+    {
+      "label": "\\checkmark",
+      "type": "function",
+      "detail": "Check mark (amssymb)",
+      "apply": "\\checkmark",
+      "snippet": false
+    }
+  ],
+  "environments": [
+    { "label": "document", "detail": "Document environment" },
+    { "label": "abstract", "detail": "Abstract environment" },
+    { "label": "enumerate", "detail": "Numbered list" },
+    { "label": "itemize", "detail": "Bulleted list" },
+    { "label": "description", "detail": "Labeled list" },
+    { "label": "center", "detail": "Centered block" },
+    { "label": "flushleft", "detail": "Left-aligned block" },
+    { "label": "flushright", "detail": "Right-aligned block" },
+    { "label": "quote", "detail": "Quotation (indented)" },
+    { "label": "quotation", "detail": "Quotation (paragraphs)" },
+    { "label": "verse", "detail": "Poetry" },
+    { "label": "tabbing", "detail": "Tabbing environment" },
+    { "label": "table", "detail": "Floating table" },
+    { "label": "table*", "detail": "Floating table (full width)" },
+    { "label": "figure", "detail": "Floating figure" },
+    { "label": "figure*", "detail": "Floating figure (full width)" },
+    { "label": "tabular", "detail": "Typeset table" },
+    { "label": "tabularx", "detail": "Auto-width table" },
+    { "label": "longtable", "detail": "Multi-page table" },
+    { "label": "array", "detail": "Math array" },
+    { "label": "matrix", "detail": "Matrix (amsmath)" },
+    { "label": "pmatrix", "detail": "Parenthesized matrix (amsmath)" },
+    { "label": "bmatrix", "detail": "Bracketed matrix (amsmath)" },
+    { "label": "vmatrix", "detail": "Determinant (amsmath)" },
+    { "label": "cases", "detail": "Cases (amsmath)" },
+    { "label": "equation", "detail": "Numbered equation" },
+    { "label": "equation*", "detail": "Unnumbered equation" },
+    { "label": "align", "detail": "Aligned equations (numbered)" },
+    { "label": "align*", "detail": "Aligned equations" },
+    { "label": "aligned", "detail": "Aligned inside math" },
+    { "label": "gather", "detail": "Centered equations" },
+    { "label": "gather*", "detail": "Centered equations (unnumbered)" },
+    { "label": "multline", "detail": "Multi-line equation" },
+    { "label": "split", "detail": "Split equation (amsmath)" },
+    { "label": "displaymath", "detail": "Display math" },
+    { "label": "math", "detail": "Inline math" },
+    { "label": "theorem", "detail": "Theorem" },
+    { "label": "lemma", "detail": "Lemma" },
+    { "label": "proof", "detail": "Proof (amsthm)" },
+    { "label": "definition", "detail": "Definition" },
+    { "label": "example", "detail": "Example" },
+    { "label": "remark", "detail": "Remark" },
+    { "label": "corollary", "detail": "Corollary" },
+    { "label": "minipage", "detail": "Minipage" },
+    { "label": "thebibliography", "detail": "Manual bibliography" },
+    { "label": "filecontents", "detail": "Write file as side effect" },
+    { "label": "adjustbox", "detail": "Auto-sized box" },
+    { "label": "sidewaystable", "detail": "Rotated table (rotating)" },
+    { "label": "sidewaysfigure", "detail": "Rotated figure (rotating)" },
+    { "label": "frame", "detail": "Beamer frame" },
+    { "label": "columns", "detail": "Beamer columns" },
+    { "label": "block", "detail": "Beamer block" },
+    { "label": "alertblock", "detail": "Beamer alert block" },
+    { "label": "exampleblock", "detail": "Beamer example block" },
+    { "label": "tikzpicture", "detail": "TikZ picture" },
+    { "label": "scope", "detail": "TikZ scope" },
+    { "label": "lstlisting", "detail": "Code listing (listings)" },
+    { "label": "minted", "detail": "Code listing (minted)" },
+    { "label": "verbatim", "detail": "Verbatim" }
+  ],
+  "packages": [
+    "amsmath",
+    "amssymb",
+    "amsthm",
+    "amsfonts",
+    "mathtools",
+    "babel",
+    "inputenc",
+    "fontenc",
+    "graphicx",
+    "hyperref",
+    "geometry",
+    "xcolor",
+    "colortbl",
+    "booktabs",
+    "multirow",
+    "array",
+    "tabularx",
+    "longtable",
+    "caption",
+    "subcaption",
+    "float",
+    "wrapfig",
+    "rotating",
+    "sidecap",
+    "enumitem",
+    "paralist",
+    "titlesec",
+    "fancyhdr",
+    "setspace",
+    "microtype",
+    "lmodern",
+    "parskip",
+    "tocloft",
+    "minitoc",
+    "natbib",
+    "biblatex",
+    "csquotes",
+    "cleveref",
+    "siunitx",
+    "units",
+    "listings",
+    "minted",
+    "verbatim",
+    "fancyvrb",
+    "tikz",
+    "pgfplots",
+    "pgf",
+    "circuitikz",
+    "chemfig",
+    "mhchem",
+    "algorithm",
+    "algpseudocode",
+    "algorithm2e",
+    "beamer",
+    "powerdot",
+    "pdfpages",
+    "transparent",
+    "eso-pic",
+    "background",
+    "tcolorbox",
+    "mdframed",
+    "framed",
+    "emptypage",
+    "afterpage",
+    "everypage",
+    "atbegshi",
+    "zref",
+    "varioref",
+    "smartref",
+    "todonotes",
+    "comment",
+    "xifthen",
+    "ifthen",
+    "calc",
+    "etoolbox",
+    "pgfkeys",
+    "hypernat",
+    "microtype",
+    "ragged2e",
+    "tabu",
+    "makecell",
+    "diagbox",
+    "arydshln",
+    "hhline",
+    "bm",
+    "slashed"
+  ]
+}

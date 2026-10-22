@@ -1,0 +1,7 @@
+{
+  "id": "article",
+  "name": "Article",
+  "description": "A clean article with sections, figures and a bibliography.",
+  "mainFile": "main.tex",
+  "compiler": "pdflatex"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "blank",
+  "name": "Blank",
+  "description": "A minimal empty document.",
+  "mainFile": "main.tex",
+  "compiler": "pdflatex"
+}
