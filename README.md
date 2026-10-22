@@ -52,7 +52,22 @@ every change is kept in a local version history.
 - Optional: `git` (Xcode command line tools) for the Git panel
 - To build: Xcode 16 or later
 
-## Build and run
+## Download
+
+Download **Verso-macOS.zip** from the [latest release](https://github.com/schneider-leon/verso/releases/latest)
+(universal build for Apple Silicon and Intel). Unzip it and move **Verso.app** to *Applications*.
+
+The app is not notarized by Apple, so macOS blocks the first launch with "Apple could not
+verify…". To allow it, do one of the following:
+
+- Open *System Settings → Privacy & Security*, scroll down and click **Open Anyway**, or
+- run this once in Terminal:
+
+  ```bash
+  xattr -dr com.apple.quarantine /Applications/Verso.app
+  ```
+
+## Build from source
 
 ```bash
 git clone https://github.com/schneider-leon/verso.git
