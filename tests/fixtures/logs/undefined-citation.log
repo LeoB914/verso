@@ -1,8 +1,0 @@
-This is pdfTeX, Version 3.141592653-1.40.25 (TeX Live 2024)
-(./main.tex
-LaTeX Warning: Citation `knuth1984' on page 1 undefined on input line 25.
-LaTeX Warning: Citation `goossens93' on page 2 undefined on input line 31.
-
-Package natbib Warning: Citation(s) may have changed.
-
-[1] [2] (./main.aux)
