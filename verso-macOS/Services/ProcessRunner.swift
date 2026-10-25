@@ -63,7 +63,11 @@ nonisolated enum ProcessRunner {
                 if group.wait(timeout: deadline) == .timedOut {
                     timedOut = true
                     process.terminate()
-                    group.wait()
+                    // A process that ignores SIGTERM must not block forever.
+                    if group.wait(timeout: .now() + 3) == .timedOut {
+                        kill(process.processIdentifier, SIGKILL)
+                        group.wait()
+                    }
                 }
                 pipe.fileHandleForReading.readabilityHandler = nil
                 buffer.append(pipe.fileHandleForReading.readDataToEndOfFile())
@@ -112,6 +116,25 @@ nonisolated enum ProcessRunner {
             merged.append(dir)
         }
         searchPath = merged
+    }
+}
+
+/// Identifies a running process beyond its (reusable) PID.
+nonisolated enum ProcessIdentity {
+    /// Start time of `pid`, or nil when no such process exists.
+    static func startTime(of pid: Int32) -> timeval? {
+        var info = kinfo_proc()
+        var size = MemoryLayout<kinfo_proc>.stride
+        var mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, pid]
+        guard sysctl(&mib, UInt32(mib.count), &info, &size, nil, 0) == 0, size > 0,
+              info.kp_proc.p_pid == pid else { return nil }
+        return info.kp_proc.p_starttime
+    }
+}
+
+extension timeval: @retroactive Equatable {
+    public static func == (lhs: timeval, rhs: timeval) -> Bool {
+        lhs.tv_sec == rhs.tv_sec && lhs.tv_usec == rhs.tv_usec
     }
 }
 

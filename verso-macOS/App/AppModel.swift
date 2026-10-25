@@ -36,6 +36,7 @@ final class AppModel {
     func open(_ url: URL) {
         let root = URL(fileURLWithPath: ProjectRegistry.canonical(url.path), isDirectory: true)
         if workspace?.root.path == root.path { return }
+        guard confirmClosingWorkspace() else { return }
         do {
             let next = try Workspace(root: root)
             workspace?.close()
@@ -48,6 +49,7 @@ final class AppModel {
     }
 
     func closeProject() {
+        guard confirmClosingWorkspace() else { return }
         workspace?.close()
         workspace = nil
         ProjectRegistry.shared.load()
@@ -130,10 +132,49 @@ final class AppModel {
         }
     }
 
-    /// Ask before quitting/closing when buffers are dirty and autosave is off.
+    /// Called before quitting.
     func canTerminate() -> Bool {
-        workspace?.saveAll()
+        guard confirmClosingWorkspace() else { return false }
         workspace?.persistUIState()
+        return true
+    }
+
+    /// Save the open project before it is closed (quit, overview, other project).
+    /// Asks when edits would be lost: autosave is off, or a file could not be saved
+    /// because it changed on disk. Returns false when the user cancels.
+    func confirmClosingWorkspace() -> Bool {
+        guard let workspace else { return true }
+        let dirty = workspace.documents.filter(\.isDirty)
+        if !dirty.isEmpty && !AppSettings.shared.autosaveEnabled {
+            let alert = NSAlert()
+            alert.messageText = dirty.count == 1
+                ? "Do you want to save the changes to \(dirty[0].name)?"
+                : "Do you want to save the changes to \(dirty.count) files?"
+            alert.informativeText = "Your changes will be lost if you don't save them."
+            alert.addButton(withTitle: "Save")
+            alert.addButton(withTitle: "Cancel")
+            alert.addButton(withTitle: "Don't Save")
+            switch alert.runModal() {
+            case .alertFirstButtonReturn:
+                workspace.saveAll()
+            case .alertSecondButtonReturn:
+                return false
+            default:
+                // Still recoverable from Version History.
+                workspace.takeSnapshotNow(reason: "Before discarding unsaved changes")
+                dirty.forEach { $0.isDirty = false }
+            }
+        } else {
+            workspace.saveAll()
+        }
+        let unsaved = workspace.documents.filter(\.isDirty)
+        guard !unsaved.isEmpty else { return true }
+        let names = unsaved.map(\.name).joined(separator: ", ")
+        guard Prompt.confirm("\(names) could not be saved.",
+                             message: "The file was changed on disk by another program. If you continue, your unsaved edits are kept only in Version History.",
+                             confirm: "Continue", destructive: true) else { return false }
+        workspace.takeSnapshotNow(reason: "Before closing with unsaved changes")
+        unsaved.forEach { $0.isDirty = false }
         return true
     }
 }

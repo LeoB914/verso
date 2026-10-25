@@ -204,6 +204,33 @@ struct Splitter: View {
     }
 }
 
+// MARK: - Conflict banner
+
+/// Shown when another program changed a file that has unsaved edits in Verso.
+/// Saving is paused until the user picks one version.
+private struct ConflictBanner: View {
+    let workspace: Workspace
+    let document: EditorDocument
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange)
+            Text("\(document.name) was changed by another program. Your unsaved edits are not saved until you choose a version.")
+                .font(.system(size: 12))
+                .lineLimit(2)
+            Spacer()
+            Button("Keep My Version") { workspace.keepMyVersion(document) }
+                .help("Overwrite the file on disk with the text in the editor")
+            Button("Load From Disk") { workspace.loadDiskVersion(document) }
+                .help("Replace the editor text with the file on disk (your edits stay in Version History)")
+        }
+        .controlSize(.small)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(Color.orange.opacity(0.12))
+    }
+}
+
 // MARK: - Editor column
 
 struct EditorColumn: View {
@@ -233,6 +260,10 @@ struct EditorColumn: View {
             switch document.kind {
             case .text:
                 VStack(spacing: 0) {
+                    if document.hasConflict {
+                        ConflictBanner(workspace: workspace, document: document)
+                        Divider()
+                    }
                     FormatToolbar(workspace: workspace)
                     Divider()
                     EditorView(workspace: workspace, document: document, appearance: .current,

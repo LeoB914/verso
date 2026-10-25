@@ -102,7 +102,7 @@
     "pattern": "no \\\\bibdata command|I found no \\\\",
     "title": "Bibliography file problem",
     "explanation": "BibTeX could not find a \\bibliography command or the .aux file is broken.",
-    "fix": "Make sure \\bibliography{...} or \\addbibresource{...} is present, and delete stale files in .openleaf/build, then recompile."
+    "fix": "Make sure \\bibliography{...} or \\addbibresource{...} is present, and delete stale files in .verso/build, then recompile."
   },
   {
     "id": "biber-missing",

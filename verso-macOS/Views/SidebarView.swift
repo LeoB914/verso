@@ -435,14 +435,15 @@ struct SearchPanel: View {
                              message: "Open files are updated too. A snapshot is taken first, so you can undo this in Version History.",
                              confirm: "Replace All") else { return }
         workspace.saveAll()
-        workspace.takeSnapshot(reason: "Before replace all")
+        // Synchronous: the snapshot must hold the files before they are rewritten.
+        workspace.takeSnapshotNow(reason: "Before replace all")
         var changed: [String] = []
         let template = useRegex ? replacement : NSRegularExpression.escapedTemplate(for: replacement)
         for file in files {
             guard let url = workspace.url(for: file), let content = try? ProjectFiles.readText(url) else { continue }
             let replaced = regex.stringByReplacingMatches(in: content.text, range: NSRange(location: 0, length: (content.text as NSString).length), withTemplate: template)
             guard replaced != content.text else { continue }
-            try? ProjectFiles.writeText(replaced, to: url, crlf: content.crlf, bom: content.bom)
+            _ = try? ProjectFiles.writeText(replaced, to: url, format: content.format)
             changed.append(file)
         }
         workspace.reloadOpenDocuments(changed)

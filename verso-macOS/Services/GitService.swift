@@ -54,15 +54,27 @@ nonisolated enum GitService {
     }
 
     static func status(_ root: URL) async throws -> GitStatus {
-        let output = try await run(root, ["status", "--porcelain=v1", "-b", "-uall"])
+        // -z: paths are printed verbatim (no quoting, no octal escapes for umlauts),
+        // entries are NUL-separated.
+        let output = try await run(root, ["status", "--porcelain=v1", "-b", "-uall", "-z"])
+        return parseStatus(output)
+    }
+
+    /// Parse `git status --porcelain=v1 -b -z` output.
+    static func parseStatus(_ output: String) -> GitStatus {
         var status = GitStatus()
-        for line in output.split(separator: "\n", omittingEmptySubsequences: true) {
-            if line.hasPrefix("## ") {
-                let header = line.dropFirst(3)
-                let branchPart = header.split(separator: " ").first.map(String.init) ?? ""
-                status.branch = branchPart.components(separatedBy: "...").first
-                if status.branch?.hasPrefix("No commits yet on ") == true || header.hasPrefix("No commits yet on ") {
-                    status.branch = header.replacingOccurrences(of: "No commits yet on ", with: "")
+        let entries = output.split(separator: "\0", omittingEmptySubsequences: true).map(String.init)
+        var index = 0
+        while index < entries.count {
+            let entry = entries[index]
+            index += 1
+            if entry.hasPrefix("## ") {
+                let header = String(entry.dropFirst(3))
+                if header.hasPrefix("No commits yet on ") {
+                    status.branch = String(header.dropFirst("No commits yet on ".count))
+                } else {
+                    let branchPart = header.split(separator: " ").first.map(String.init) ?? ""
+                    status.branch = branchPart.components(separatedBy: "...").first
                 }
                 if let ahead = header.range(of: #"ahead (\d+)"#, options: .regularExpression) {
                     status.ahead = Int(header[ahead].filter(\.isNumber)) ?? 0
@@ -72,11 +84,11 @@ nonisolated enum GitService {
                 }
                 continue
             }
-            guard line.count > 3 else { continue }
-            let chars = Array(line)
-            var path = String(line.dropFirst(3))
-            if let arrow = path.range(of: " -> ") { path = String(path[arrow.upperBound...]) }
-            if path.hasPrefix("\"") && path.hasSuffix("\"") { path = String(path.dropFirst().dropLast()) }
+            let chars = Array(entry)
+            guard chars.count > 3 else { continue }
+            let path = String(chars[3...])
+            // Renames and copies are followed by their original path.
+            if chars[0] == "R" || chars[0] == "C" || chars[1] == "R" || chars[1] == "C" { index += 1 }
             status.files.append(GitFileStatus(path: path, indexStatus: chars[0], workTreeStatus: chars[1]))
         }
         return status
@@ -110,7 +122,7 @@ nonisolated enum GitService {
     *.bbl
 
     # Verso
-    .openleaf/build/
+    .verso/build/
 
     # OS junk
     .DS_Store
@@ -122,7 +134,7 @@ nonisolated enum GitService {
         try await run(root, ["init"])
         let ignore = root.appendingPathComponent(".gitignore")
         let existing = (try? String(contentsOf: ignore, encoding: .utf8)) ?? ""
-        if !existing.contains(".openleaf/build/") {
+        if !existing.contains(".verso/build/") {
             let existingLines = Set(existing.components(separatedBy: .newlines).map { $0.trimmingCharacters(in: .whitespaces) })
             let missing = latexGitignore.components(separatedBy: "\n").filter { !$0.isEmpty && !existingLines.contains($0) }
             var content = existing

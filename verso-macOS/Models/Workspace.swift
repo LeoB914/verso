@@ -8,13 +8,15 @@ final class EditorDocument: Identifiable {
     var relPath: String
     let kind: FileKind
     var isDirty = false
+    /// The file changed on disk while this tab had unsaved edits; saving is paused
+    /// until the user keeps one version.
+    var hasConflict = false
 
     @ObservationIgnored let storage = NSTextStorage()
     @ObservationIgnored let undoManager = UndoManager()
     @ObservationIgnored let highlighter = LatexHighlighter()
     @ObservationIgnored var savedText = ""
-    @ObservationIgnored var crlf = false
-    @ObservationIgnored var bom = false
+    @ObservationIgnored var format = TextFormat()
     @ObservationIgnored var selection = NSRange(location: 0, length: 0)
     /// Vertical scroll position of the editor (nil = never shown).
     @ObservationIgnored var scrollY: CGFloat?
@@ -49,6 +51,7 @@ final class EditorDocument: Identifiable {
         highlighter.highlightAll(storage)
         savedText = text
         isDirty = false
+        hasConflict = false
         selection = NSRange(location: min(selection.location, storage.length), length: 0)
     }
 
@@ -92,7 +95,7 @@ enum SidebarTab: String, CaseIterable, Identifiable {
     }
 }
 
-struct LabelInfo: Hashable {
+nonisolated struct LabelInfo: Hashable {
     var key: String
     var file: String
     var line: Int
@@ -152,6 +155,7 @@ final class Workspace {
     @ObservationIgnored private var watcherWork: DispatchWorkItem?
     @ObservationIgnored private var snapshotTimer: Timer?
     @ObservationIgnored private var restoringState = true
+    @ObservationIgnored private var reindexGeneration = 0
 
     private let settings = AppSettings.shared
     private var app: AppModel { AppModel.shared }
@@ -192,7 +196,7 @@ final class Workspace {
     /// Called once after the workspace became the app's current project.
     func start() {
         ProjectRegistry.shared.register(root.path)
-        watcher = FileWatcher(path: root.path) { [weak self] paths in self?.filesChanged(paths) }
+        watcher = FileWatcher(path: root.path) { [weak self] events in self?.filesChanged(events) }
         restoreUIState()
         reindex()
         refreshWordCount()
@@ -271,8 +275,7 @@ final class Workspace {
             do {
                 let file = try ProjectFiles.readText(url)
                 document.load(text: file.text)
-                document.crlf = file.crlf
-                document.bom = file.bom
+                document.format = file.format
             } catch {
                 app.showError("Could not open \(relPath): \(error.localizedDescription)")
                 return nil
@@ -305,9 +308,16 @@ final class Workspace {
                 switch alert.runModal() {
                 case .alertFirstButtonReturn: save(document)
                 case .alertSecondButtonReturn: return
-                default: break
+                default: document.isDirty = false
                 }
             }
+            // Saving can be refused (file changed on disk) — never drop the edits silently.
+            if document.isDirty, !Prompt.confirm("\(document.name) could not be saved.",
+                                                 message: document.hasConflict ? "The file was changed on disk by another program. Closing discards your unsaved edits (they stay in Version History)." : "Closing discards your unsaved edits.",
+                                                 confirm: "Close Without Saving", destructive: true) {
+                return
+            }
+            if document.isDirty { takeSnapshotNow(reason: "Before closing unsaved tab") }
         }
         documents.remove(at: index)
         if activePath == relPath {
@@ -320,17 +330,43 @@ final class Workspace {
         for document in documents where document.relPath != relPath { closeTab(document.relPath) }
     }
 
-    func save(_ document: EditorDocument) {
+    /// Save a tab. Refuses (and flags a conflict) when another program changed the
+    /// file since it was opened or last saved, unless `force` is set.
+    func save(_ document: EditorDocument, force: Bool = false) {
         guard document.kind == .text, let url = url(for: document.relPath) else { return }
         autosaveWork[document.relPath]?.cancel()
+        if !force, let disk = try? ProjectFiles.readText(url), disk.text != document.savedText {
+            document.hasConflict = true
+            return
+        }
         let text = document.text
         do {
-            try ProjectFiles.writeText(text, to: url, crlf: document.crlf, bom: document.bom)
+            let written = try ProjectFiles.writeText(text, to: url, format: document.format)
+            if document.format.latin1 && !written.latin1 {
+                app.showError("\(document.relPath) contains characters that Latin-1 cannot store, so it was saved as UTF-8. Update \\usepackage[latin1]{inputenc} if the document uses it.")
+            }
+            document.format = written
             document.savedText = text
             document.isDirty = false
+            document.hasConflict = false
         } catch {
             app.showError("Could not save \(document.relPath): \(error.localizedDescription)")
         }
+    }
+
+    /// Conflict resolution: overwrite the file on disk with the editor's text.
+    func keepMyVersion(_ document: EditorDocument) {
+        save(document, force: true)
+    }
+
+    /// Conflict resolution: replace the editor's text with the file on disk.
+    /// The unsaved edits are kept in a snapshot first.
+    func loadDiskVersion(_ document: EditorDocument) {
+        guard let url = url(for: document.relPath), let file = try? ProjectFiles.readText(url) else { return }
+        takeSnapshotNow(reason: "Before loading external changes")
+        document.format = file.format
+        document.reload(text: file.text)
+        scheduleReindex()
     }
 
     func saveActive() {
@@ -485,7 +521,9 @@ final class Workspace {
             relPath = "figures/\(picked.lastPathComponent)"
             refreshTree()
         }
-        let withoutExt = (relPath as NSString).deletingPathExtension
+        // \includegraphics resolves paths from the main file's folder.
+        let mainDir = (config.mainFile as NSString).deletingLastPathComponent
+        let withoutExt = ProjectFiles.relativePath(from: mainDir, to: (relPath as NSString).deletingPathExtension)
         let base = (withoutExt as NSString).lastPathComponent
         textView?.insertSnippet("""
         \\begin{figure}[ht]
@@ -498,19 +536,34 @@ final class Workspace {
         """)
     }
 
-    private func filesChanged(_ paths: [String]) {
-        let buildPath = buildDirectory.path
-        let gitPath = root.appendingPathComponent(".git").path
-        let relevant = paths.filter { !$0.hasPrefix(buildPath) && !$0.hasPrefix(gitPath) }
+    @ObservationIgnored private var pendingEvents: [FileEvent] = []
+
+    private func filesChanged(_ events: [FileEvent]) {
+        let buildPath = buildDirectory.resolvingSymlinksInPath().path
+        let gitPath = root.appendingPathComponent(".git").resolvingSymlinksInPath().path
+        let relevant = events.filter { !$0.path.hasPrefix(buildPath) && !$0.path.hasPrefix(gitPath) }
         guard !relevant.isEmpty else { return }
+        pendingEvents += relevant
         watcherWork?.cancel()
         let work = DispatchWorkItem { [weak self] in
             guard let self else { return }
-            self.refreshTree()
-            for document in self.documents where document.kind == .text && !document.isDirty {
+            let events = self.pendingEvents
+            self.pendingEvents = []
+            // A plain content change (e.g. our own autosave) needs no new file tree.
+            if events.contains(where: \.changesStructure) { self.refreshTree() }
+            let rootPath = self.root.resolvingSymlinksInPath().path
+            let touched = Set(events.map(\.path))
+            let rescanAll = events.contains(where: \.mustRescan)
+            for document in self.documents where document.kind == .text {
                 guard let url = self.url(for: document.relPath),
+                      rescanAll || touched.contains(rootPath + "/" + document.relPath),
                       let file = try? ProjectFiles.readText(url), file.text != document.savedText else { continue }
-                document.reload(text: file.text)
+                if document.isDirty {
+                    document.hasConflict = true
+                } else {
+                    document.format = file.format
+                    document.reload(text: file.text)
+                }
             }
             self.scheduleReindex()
         }
@@ -724,62 +777,25 @@ final class Workspace {
         return try? ProjectFiles.readText(url).text
     }
 
+    /// Rebuild labels, macros, outline and bibliography. Reading and parsing run in the
+    /// background; only the open buffers are captured on the main thread.
     func reindex() {
-        let texFiles = ProjectFiles.collectFiles(root: root) { ["tex", "ltx", "sty", "cls"].contains(($0 as NSString).pathExtension.lowercased()) }
-        var labels: [LabelInfo] = []
-        var definitions = Set<DefinitionEntry>()
-        var structures: [String: DocumentStructure] = [:]
-        for file in texFiles {
-            guard let text = content(of: file) else { continue }
-            let structure = LatexStructure.parse(text)
-            structures[file] = structure
-            for reference in structure.references where reference.kind == .label {
-                labels.append(LabelInfo(key: reference.key, file: file, line: reference.line))
-            }
-            definitions.formUnion(structure.definitions)
+        var openTexts: [String: String] = [:]
+        for document in documents where document.kind == .text { openTexts[document.relPath] = document.text }
+        reindexGeneration += 1
+        let generation = reindexGeneration
+        let root = self.root, mainFile = config.mainFile, activePath = self.activePath
+        Task { [weak self] in
+            let index = await Task.detached(priority: .userInitiated) {
+                ProjectIndex.build(root: root, mainFile: mainFile, fallbackFile: activePath, openTexts: openTexts)
+            }.value
+            // A newer reindex may have started meanwhile; only the latest result counts.
+            guard let self, self.reindexGeneration == generation else { return }
+            self.labels = index.labels
+            self.definitions = index.definitions
+            self.outline = index.outline
+            self.bibEntries = index.bibEntries
         }
-        self.labels = labels
-        self.definitions = Array(definitions)
-
-        // Outline in document order, following \input / \include from the main file.
-        var outline: [SectionNode] = []
-        var visited = Set<String>()
-        func resolveInput(_ key: String, from file: String) -> String? {
-            var target = key
-            if (target as NSString).pathExtension.isEmpty { target += ".tex" }
-            let dir = (file as NSString).deletingLastPathComponent
-            let candidates = [target, dir.isEmpty ? target : "\(dir)/\(target)"]
-                .map { ($0 as NSString).standardizingPath }
-            return candidates.first { structures[$0] != nil }
-        }
-        func visit(_ file: String) {
-            guard !visited.contains(file), let structure = structures[file] else { return }
-            visited.insert(file)
-            let inputs = structure.references.filter { $0.kind == .input }
-            var sectionIndex = 0, inputIndex = 0
-            while sectionIndex < structure.sections.count || inputIndex < inputs.count {
-                let nextSection = sectionIndex < structure.sections.count ? structure.sections[sectionIndex].position : Int.max
-                let nextInput = inputIndex < inputs.count ? inputs[inputIndex].position : Int.max
-                if nextSection < nextInput {
-                    var section = structure.sections[sectionIndex]
-                    section.file = file
-                    outline.append(section)
-                    sectionIndex += 1
-                } else {
-                    if let target = resolveInput(inputs[inputIndex].key, from: file) { visit(target) }
-                    inputIndex += 1
-                }
-            }
-        }
-        if !config.mainFile.isEmpty { visit(config.mainFile) }
-        if outline.isEmpty, let file = activePath, structures[file] != nil { visit(file) }
-        self.outline = outline
-
-        var bib: [BibEntry] = []
-        for file in ProjectFiles.collectFiles(root: root, filter: { $0.lowercased().hasSuffix(".bib") }) {
-            if let text = content(of: file) { bib += BibParser.parse(text, file: file) }
-        }
-        bibEntries = bib
     }
 
     /// Completion candidates for the editor.
@@ -861,6 +877,12 @@ final class Workspace {
         return result
     }
 
+    /// Snapshot synchronously — use before the app itself rewrites files, so the
+    /// snapshot is guaranteed to hold the state before the change.
+    func takeSnapshotNow(reason: String, label: String? = nil) {
+        HistoryStore.create(root: root, reason: reason, label: label, overrides: dirtyOverrides())
+    }
+
     func takeSnapshot(reason: String, label: String? = nil) {
         let root = self.root
         let overrides = dirtyOverrides()
@@ -873,8 +895,77 @@ final class Workspace {
     func reloadOpenDocuments(_ relPaths: [String]) {
         for document in documents where relPaths.contains(document.relPath) {
             guard let url = url(for: document.relPath), let file = try? ProjectFiles.readText(url) else { continue }
+            document.format = file.format
             document.reload(text: file.text)
         }
         reindex()
+    }
+}
+
+/// Project index (labels, macros, outline, bibliography), built off the main thread.
+nonisolated struct ProjectIndex {
+    var labels: [LabelInfo] = []
+    var definitions: [DefinitionEntry] = []
+    var outline: [SectionNode] = []
+    var bibEntries: [BibEntry] = []
+
+    /// `openTexts` (relPath → text) overrides the disk content of open tabs.
+    static func build(root: URL, mainFile: String, fallbackFile: String?, openTexts: [String: String]) -> ProjectIndex {
+        func content(_ relPath: String) -> String? {
+            if let text = openTexts[relPath] { return text }
+            guard let url = ProjectFiles.resolve(root: root, relPath) else { return nil }
+            return try? ProjectFiles.readText(url).text
+        }
+        var index = ProjectIndex()
+        let texFiles = ProjectFiles.collectFiles(root: root) { ["tex", "ltx", "sty", "cls"].contains(($0 as NSString).pathExtension.lowercased()) }
+        var definitions = Set<DefinitionEntry>()
+        var structures: [String: DocumentStructure] = [:]
+        for file in texFiles {
+            guard let text = content(file) else { continue }
+            let structure = LatexStructure.parse(text)
+            structures[file] = structure
+            for reference in structure.references where reference.kind == .label {
+                index.labels.append(LabelInfo(key: reference.key, file: file, line: reference.line))
+            }
+            definitions.formUnion(structure.definitions)
+        }
+        index.definitions = Array(definitions)
+
+        // Outline in document order, following \input / \include from the main file.
+        var visited = Set<String>()
+        func resolveInput(_ key: String, from file: String) -> String? {
+            var target = key
+            if (target as NSString).pathExtension.isEmpty { target += ".tex" }
+            let dir = (file as NSString).deletingLastPathComponent
+            let candidates = [target, dir.isEmpty ? target : "\(dir)/\(target)"]
+                .map { ($0 as NSString).standardizingPath }
+            return candidates.first { structures[$0] != nil }
+        }
+        func visit(_ file: String) {
+            guard !visited.contains(file), let structure = structures[file] else { return }
+            visited.insert(file)
+            let inputs = structure.references.filter { $0.kind == .input }
+            var sectionIndex = 0, inputIndex = 0
+            while sectionIndex < structure.sections.count || inputIndex < inputs.count {
+                let nextSection = sectionIndex < structure.sections.count ? structure.sections[sectionIndex].position : Int.max
+                let nextInput = inputIndex < inputs.count ? inputs[inputIndex].position : Int.max
+                if nextSection < nextInput {
+                    var section = structure.sections[sectionIndex]
+                    section.file = file
+                    index.outline.append(section)
+                    sectionIndex += 1
+                } else {
+                    if let target = resolveInput(inputs[inputIndex].key, from: file) { visit(target) }
+                    inputIndex += 1
+                }
+            }
+        }
+        if !mainFile.isEmpty { visit(mainFile) }
+        if index.outline.isEmpty, let file = fallbackFile, structures[file] != nil { visit(file) }
+
+        for file in ProjectFiles.collectFiles(root: root, filter: { $0.lowercased().hasSuffix(".bib") }) {
+            if let text = content(file) { index.bibEntries += BibParser.parse(text, file: file) }
+        }
+        return index
     }
 }

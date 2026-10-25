@@ -1,0 +1,77 @@
+name: build
+
+# Tests run on every push and pull request. Publishing a GitHub release builds
+# Verso.app (Apple Silicon + Intel) and attaches Verso-<version>.dmg to it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Run unit tests
+        run: |
+          xcodebuild test \
+            -project verso-macOS.xcodeproj \
+            -scheme verso-macOS \
+            -destination 'platform=macOS' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO
+
+  dmg:
+    needs: test
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Version from the release tag (v1.2.0 → 1.2.0)
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          VERSION="${TAG#v}"
+          echo "VERSION=${VERSION:-0.0.0-dev}" >> "$GITHUB_ENV"
+
+      - name: Build Verso.app (universal, ad-hoc signed)
+        run: |
+          xcodebuild build \
+            -project verso-macOS.xcodeproj \
+            -scheme verso-macOS \
+            -configuration Release \
+            -derivedDataPath build/DerivedData \
+            ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= \
+            MARKETING_VERSION="$VERSION" CURRENT_PROJECT_VERSION="${{ github.run_number }}"
+          codesign --verify --deep --strict build/DerivedData/Build/Products/Release/Verso.app
+
+      - name: Create the DMG
+        run: |
+          mkdir -p build/dmg
+          cp -R build/DerivedData/Build/Products/Release/Verso.app build/dmg/
+          ln -s /Applications build/dmg/Applications
+          hdiutil create -volname "Verso" -srcfolder build/dmg -ov -format UDZO "build/Verso-$VERSION.dmg"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Verso-${{ env.VERSION }}
+          path: build/Verso-${{ env.VERSION }}.dmg
+
+      - name: Attach the DMG to the release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" "build/Verso-$VERSION.dmg" --clobber

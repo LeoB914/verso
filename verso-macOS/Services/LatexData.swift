@@ -1,6 +1,6 @@
 import Foundation
 
-/// Completion catalogue loaded from `latex-commands.json` (shared with the Electron version).
+/// Completion catalogue loaded from `latex-commands.json`.
 enum LatexData {
     struct Command: Decodable {
         var label: String

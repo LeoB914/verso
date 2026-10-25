@@ -14,8 +14,7 @@ nonisolated enum AppPaths {
     static var historyDirectory: URL { supportDirectory.appendingPathComponent("history", isDirectory: true) }
 }
 
-/// Per-project configuration, stored in `<project>/.openleaf/project.json`
-/// (same format as the Electron version, so existing projects keep working).
+/// Per-project configuration, stored in `<project>/.verso/project.json`.
 struct ProjectConfig: Codable, Equatable {
     var mainFile: String = ""
     var compiler: Compiler = .pdflatex
@@ -38,7 +37,8 @@ struct ProjectConfig: Codable, Equatable {
         spellEnabled = (try? c.decode(Bool.self, forKey: .spellEnabled)) ?? true
     }
 
-    static let directoryName = ".openleaf"
+    /// Folder for project settings and build output inside every project.
+    nonisolated static let directoryName = ".verso"
 
     static func configURL(root: URL) -> URL {
         root.appendingPathComponent(directoryName).appendingPathComponent("project.json")
@@ -118,35 +118,12 @@ final class ProjectRegistry {
     private init() { load() }
 
     func load() {
-        if !FileManager.default.fileExists(atPath: AppPaths.registryFile.path) {
-            importElectronRegistry()
-        }
         guard let data = try? Data(contentsOf: AppPaths.registryFile),
               let decoded = try? JSONDecoder().decode([RegistryEntry].self, from: data) else {
             entries = []
             return
         }
         entries = dedupe(decoded)
-    }
-
-    /// The Electron version kept its registry in `config.json` in the same
-    /// Application Support folder; take it over on first launch.
-    private func importElectronRegistry() {
-        let legacy = AppPaths.supportDirectory.appendingPathComponent("config.json")
-        guard let data = try? Data(contentsOf: legacy),
-              let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-              let projects = object["projects"] as? [[String: Any]] else { return }
-        let imported: [RegistryEntry] = projects.compactMap { item in
-            guard let path = item["path"] as? String else { return nil }
-            return RegistryEntry(path: path,
-                                 name: item["name"] as? String ?? (path as NSString).lastPathComponent,
-                                 lastOpened: (item["lastOpened"] as? NSNumber)?.doubleValue ?? 0,
-                                 tags: item["tags"] as? [String] ?? [],
-                                 uiState: nil)
-        }
-        if let data = try? JSONEncoder().encode(imported) {
-            try? data.write(to: AppPaths.registryFile, options: .atomic)
-        }
     }
 
     private func persist() {

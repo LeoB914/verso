@@ -15,8 +15,8 @@ nonisolated struct Snapshot: Codable, Identifiable, Hashable {
     var date: Date { Date(timeIntervalSince1970: timestamp / 1000) }
 }
 
-/// Snapshot history, independent of Git. Same on-disk format as the Electron
-/// version: `history/<projectId>/index.json` + gzip blobs addressed by sha256.
+/// Snapshot history, independent of Git: `history/<projectId>/index.json` plus
+/// gzip blobs addressed by sha256.
 nonisolated enum HistoryStore {
     static let autoReason = "Auto snapshot"
     private static let textExtensions: Set<String> = ["tex", "ltx", "sty", "cls", "bib", "txt", "md", "csv", "tikz", "json", "cfg"]
@@ -123,7 +123,7 @@ nonisolated enum HistoryStore {
             guard let url = ProjectFiles.resolve(root: root, rel) else { continue }
             let existing = try? ProjectFiles.readText(url)
             if existing?.text == content { continue }
-            try? ProjectFiles.writeText(content, to: url, crlf: existing?.crlf ?? false, bom: existing?.bom ?? false)
+            _ = try? ProjectFiles.writeText(content, to: url, format: existing?.format ?? TextFormat())
             restored.append(rel)
         }
         return restored

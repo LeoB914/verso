@@ -73,10 +73,15 @@ nonisolated final class CompileRunner: @unchecked Sendable {
     }
 
     /// Terminate a process and all of its descendants (latexmk → pdflatex/biber).
+    /// Processes still alive after 1.5 s get SIGKILL — but only if the PID still
+    /// belongs to the same process (same start time), never to a reused PID.
     private func killTree(_ pid: Int32) {
         for child in childPIDs(of: pid) { killTree(child) }
+        let started = ProcessIdentity.startTime(of: pid)
         kill(pid, SIGTERM)
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1.5) { kill(pid, SIGKILL) }
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.5) {
+            if let started, ProcessIdentity.startTime(of: pid) == started { kill(pid, SIGKILL) }
+        }
     }
 
     private func childPIDs(of pid: Int32) -> [Int32] {

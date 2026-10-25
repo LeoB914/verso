@@ -121,8 +121,6 @@ final class AppSettings {
     var effectiveProjectDirectory: URL {
         if !defaultProjectDir.isEmpty { return URL(fileURLWithPath: defaultProjectDir) }
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let legacy = documents.appendingPathComponent("OpenLeaf")
-        if FileManager.default.fileExists(atPath: legacy.path) { return legacy }
         return documents.appendingPathComponent("Verso")
     }
 

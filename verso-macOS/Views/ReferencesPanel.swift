@@ -154,13 +154,13 @@ private struct AddBibEntry: View {
             finalKey += String(suffix)
         }
         workspace.saveAll()
-        let existing = (try? ProjectFiles.readText(url)) ?? (text: "", crlf: false, bom: false)
+        let existing = (try? ProjectFiles.readText(url)) ?? (text: "", format: TextFormat())
         var content = existing.text
         if !content.isEmpty && !content.hasSuffix("\n") { content += "\n" }
         if !content.isEmpty { content += "\n" }
         content += bibtex + "\n"
         do {
-            try ProjectFiles.writeText(content, to: url, crlf: existing.crlf, bom: existing.bom)
+            try ProjectFiles.writeText(content, to: url, format: existing.format)
             workspace.refreshTree()
             workspace.reloadOpenDocuments([targetFile])
             if cite { insertCitation([finalKey], in: workspace) }

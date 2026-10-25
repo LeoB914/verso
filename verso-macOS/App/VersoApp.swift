@@ -45,7 +45,7 @@ struct VersoApp: App {
     }
 }
 
-/// Menu bar. Shortcuts follow the Electron command registry (Mod = ⌘).
+/// Menu bar with all commands and their keyboard shortcuts.
 struct VersoCommands: Commands {
     let model: AppModel
     private var workspace: Workspace? { model.workspace }
@@ -234,6 +234,7 @@ struct VersoCommands: Commands {
 extension AppModel {
     func closeProjectIfNeededThenNew() {
         if workspace != nil { closeProject() }
-        showNewProject = true
+        // closeProject() keeps the project open when the user cancels.
+        if workspace == nil { showNewProject = true }
     }
 }

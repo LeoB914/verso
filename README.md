@@ -5,7 +5,7 @@
 <h1 align="center">Verso for macOS</h1>
 
 <p align="center">
-  A native, local, offline-first LaTeX editor for macOS — built with SwiftUI, AppKit and PDFKit.<br>
+  A native, local, offline-first LaTeX editor for macOS — built with SwiftUI, AppKit and PDFKit.
 </p>
 
 <p align="center">
@@ -15,9 +15,8 @@
   <img src="https://img.shields.io/badge/TeX-latexmk%20%2B%20your%20TeX%20distribution-008080" alt="Uses your TeX distribution">
 </p>
 
-Verso for macOS is a native rewrite of [Verso](https://github.com/LeoB914/verso) by LeoB914, which is a cross-platform Electron app. This fork contains only the native version.
-It has no web view and no Node runtime, and it uses the system's text system, PDFKit and
-FSEvents.
+Verso is a fully native Mac app: no web view and no Node runtime — it uses the system's
+text system, PDFKit and FSEvents.
 
 Verso compiles with the TeX installation you already have (MacTeX or TeX Live). There are
 no accounts and no cloud. Your project is a folder, collaboration happens through Git, and
@@ -49,12 +48,13 @@ every change is kept in a local version history.
 - macOS 15 or later
 - A TeX distribution with `latexmk`, e.g. [MacTeX](https://www.tug.org/mactex/)
 - Optional: `git` (Xcode command line tools) for the Git panel
-- To build: Xcode 16 or later
+- To build: Xcode 26 or later
 
 ## Download
 
-Download **Verso-macOS.zip** from the [latest release](https://github.com/schneider-leon/verso/releases/latest)
-(universal build for Apple Silicon and Intel). Unzip it and move **Verso.app** to *Applications*.
+Download **Verso-<version>.dmg** from the [latest release](https://github.com/LeoB914/verso/releases/latest)
+(universal build for Apple Silicon and Intel). Open it and drag **Verso.app** onto
+*Applications*.
 
 The app is not notarized by Apple, so macOS blocks the first launch with "Apple could not
 verify…". To allow it, do one of the following:
@@ -69,7 +69,7 @@ verify…". To allow it, do one of the following:
 ## Build from source
 
 ```bash
-git clone https://github.com/schneider-leon/verso.git
+git clone https://github.com/LeoB914/verso.git
 open verso/verso-macOS.xcodeproj
 ```
 
@@ -78,6 +78,14 @@ Then run the **verso-macOS** scheme (⌘R). The built app is called `Verso.app`.
 
 The App Sandbox is disabled on purpose: `latexmk` and TeX need the login-shell `PATH`,
 `~/Library/texlive` and arbitrary project folders.
+
+## Releases
+
+GitHub Actions (`.github/workflows/build.yml`) runs the tests on every push and pull
+request. To publish a version, create a release on GitHub with a tag like `v1.2.0` and
+publish it: the workflow builds Verso.app for Apple Silicon and Intel, packs it into
+`Verso-1.2.0.dmg` and attaches the DMG to that release. The app is ad-hoc signed, not
+notarized (see *Download*).
 
 ## Quick start
 
@@ -97,19 +105,13 @@ The App Sandbox is disabled on purpose: `latexmk` and TeX need the login-shell `
 | `⌘B` / `⌘I`  | Bold / italic          | `⇧⌘H`         | Version history      |
 | `⌘/`         | Toggle comment         | `⇧⌘E` / `⇧⌘D` | Toggle sidebar / PDF |
 
-## Compatibility with the Electron version
+## Project folders
 
-- Projects are plain folders. `.openleaf/project.json` and the `.openleaf/build/` output
-  directory work exactly as in the original, so existing projects open unchanged.
-- App data lives in the same place, `~/Library/Application Support/Verso`. The project
-  list is imported on first launch, and existing version-history snapshots (gzip blobs
-  plus `index.json`) stay readable.
-- Templates, the completion catalogue (`latex-commands.json`) and the error explanations
-  (`latex-error-help.json`) are taken from the original.
-
-Not ported (yet): AI chat, Vim mode, visual (WYSIWYG) mode, math hover previews, custom
-editor themes and keybindings, focus mode, a detached PDF window and the crash-recovery
-sheet (autosave is on by default).
+A project is a plain folder. Verso keeps its per-project settings in
+`.verso/project.json` and the build output (PDF, log, SyncTeX) in `.verso/build/`.
+When you initialize Git in the Git panel, `.verso/build/` is ignored automatically. App data
+(project list, version history, user templates) lives in
+`~/Library/Application Support/Verso`.
 
 ## Architecture
 
@@ -128,16 +130,15 @@ verso-macOS/
   Resources/  templates (Templates.bundle), completion and error-help databases
 ```
 
-| Original (Electron)                  | Native                                            |
-| ------------------------------------ | ------------------------------------------------- |
-| CodeMirror 6                         | `NSTextView` subclass + regex highlighter         |
-| pdf.js                               | PDFKit (`PDFView`)                                |
-| Node `child_process`                 | `Process` with argument arrays (no shell strings) |
-| chokidar                             | FSEvents                                          |
-| simple-git                           | system `git`                                      |
-| electron-store / zod settings        | `UserDefaults` / lenient `Codable`                |
-| IPC + zustand stores                 | `@Observable` models (`AppModel`, `Workspace`)    |
-| nspell dictionaries                  | macOS spell checker                               |
+## Tests
+
+```bash
+xcodebuild test -project verso-macOS.xcodeproj -scheme verso-macOS CODE_SIGNING_ALLOWED=NO
+```
+
+or ⌘U in Xcode. The unit tests (`verso-macOSTests/`) run in temporary folders and cover
+path safety, file encodings, conflict handling, Git status parsing, the project index and
+ZIP import.
 
 ## Security note
 
@@ -152,4 +153,4 @@ Verso was developed with the help of AI coding assistants, including Claude Code
 
 ## License
 
-[MIT](LICENSE), as in the original project.
+[MIT](LICENSE)

@@ -150,7 +150,8 @@ struct GitPanel: View {
                 Button("Discard Changes…", role: .destructive) {
                     guard Prompt.confirm("Discard changes to \(file.path)?", message: "This cannot be undone with Git, but Verso's version history keeps a snapshot.",
                                          confirm: "Discard", destructive: true) else { return }
-                    workspace.takeSnapshot(reason: "Before discarding changes")
+                    // Synchronous: the snapshot must hold the changes before git restores the file.
+                    workspace.takeSnapshotNow(reason: "Before discarding changes")
                     run(nil) {
                         try await GitService.run(root, ["restore", "--", file.path])
                         workspace.reloadOpenDocuments([file.path])
