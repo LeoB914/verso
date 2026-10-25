@@ -1,22 +1,6 @@
+# Xcode
+xcuserdata/
+DerivedData/
+build/
+*.xcuserstate
 .DS_Store
-.openleaf/build/
-.playwright/
-*.log
-*.tsbuildinfo
-/.openleaf/
-build-icons/
-coverage/
-dist/
-node_modules/
-out/
-playwright-report/
-test-results/
-# Test fixtures are real LaTeX logs and must be committed.
-!tests/fixtures/logs/*.log
-
-# Copied from node_modules on npm install (scripts/copy-dictionaries.mjs)
-/resources/dictionaries/
-
-# Local instructions for AI coding agents
-/AGENTS.md
-/CLAUDE.md

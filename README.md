@@ -1,100 +1,150 @@
 <p align="center">
-  <img src="resources/icon.svg" alt="Verso" width="96" height="96">
+  <img src="verso-macOS/Assets.xcassets/Logo.imageset/logo@2x.png" alt="Verso" width="96" height="96">
 </p>
 
-<h1 align="center">Verso</h1>
+<h1 align="center">Verso for macOS</h1>
 
 <p align="center">
-  A local, offline-first LaTeX editor for macOS, Windows and Linux.<br>
+  A native, local, offline-first LaTeX editor for macOS — built with SwiftUI, AppKit and PDFKit.<br>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
-  <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey" alt="macOS, Windows, Linux">
+  <img src="https://img.shields.io/badge/platform-macOS%2015%2B-lightgrey" alt="macOS 15+">
+  <img src="https://img.shields.io/badge/Swift-SwiftUI%20%2B%20AppKit-F05138" alt="SwiftUI + AppKit">
   <img src="https://img.shields.io/badge/TeX-latexmk%20%2B%20your%20TeX%20distribution-008080" alt="Uses your TeX distribution">
 </p>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/main-dark.png">
-  <img src="docs/screenshots/main-light.png" alt="Verso with the editor, file tree and compiled PDF">
-</picture>
+Verso for macOS is a native rewrite of [Verso](https://github.com/LeoB914/verso) by LeoB914, which is a cross-platform Electron app. This fork contains only the native version.
+It has no web view and no Node runtime, and it uses the system's text system, PDFKit and
+FSEvents.
 
-Verso compiles with the TeX installation you already have (TeX Live, MacTeX, MiKTeX). There
-are no accounts and no cloud: your project is a folder, collaboration happens through Git,
-and every change is kept in a local version history.
+Verso compiles with the TeX installation you already have (MacTeX or TeX Live). There are
+no accounts and no cloud. Your project is a folder, collaboration happens through Git, and
+every change is kept in a local version history.
 
 ## Highlights
 
 - **Write → compile → read in one window.** latexmk with pdfLaTeX, XeLaTeX or LuaLaTeX,
-  optional auto-compile, readable error explanations and SyncTeX in both directions.
-- **An editor that knows LaTeX.** Autocomplete for commands, environments, labels,
-  citations and files; snippets, folding, outline, spellcheck (English/German), Vim mode.
-- **Visual mode.** Headings, formatting, lists, math, figures, tables and citations
-  rendered in place, while the source stays clean LaTeX.
-- **Bibliography tools.** Add entries by DOI, arXiv id or ISBN, cite picker, duplicate and
-  unused-entry reports.
-- **Never lose work.** Autosave, crash recovery and snapshot history with diffs and
-  restore — independent of Git.
-- **Git built in.** Stage, commit, push, pull, switch and create branches, inspect
+  optional auto-compile, a problems panel with readable error explanations, and SyncTeX
+  in both directions.
+- **An editor that knows LaTeX.** Syntax highlighting, line numbers with error markers,
+  and autocompletion for commands, environments, labels, citations, packages, files and
+  your own macros. It also has snippets with tab stops, `\begin{…}` → `\end{…}`, `\item`
+  continuation and bracket/`$` pairing.
+- **Project tools.** File tree with drag & drop, an outline that follows
+  `\input`/`\include`, project-wide search and replace, a symbol palette, a table dialog
+  and a word count (texcount).
+- **Bibliography tools.** Add entries by DOI, arXiv id or ISBN. The app also has a cite
+  picker and a report of missing, unused and duplicate entries.
+- **Never lose work.** Autosave and snapshot history with diffs and restore, independent
+  of Git.
+- **Git built in.** Stage, commit, push, pull, switch and create branches, and inspect
   commits.
-- **Optional AI chat** with a local Ollama model or a cloud provider of your choice.
+- **Native macOS.** Menu bar commands with keyboard shortcuts, a command palette, the
+  system find bar and spell checker, and light and dark mode.
 
-## Install
+## Requirements
 
-Download the installer for your system from the
-[latest release](../../releases/latest):
+- macOS 15 or later
+- A TeX distribution with `latexmk`, e.g. [MacTeX](https://www.tug.org/mactex/)
+- Optional: `git` (Xcode command line tools) for the Git panel
+- To build: Xcode 16 or later
 
-| System  | File                             |
-| ------- | -------------------------------- |
-| macOS   | `.dmg` (Apple Silicon and Intel) |
-| Windows | `.exe` installer                 |
-| Linux   | `.AppImage` or `.deb`            |
+## Download
 
-The installers are not code-signed yet, so your system will warn you on first launch:
+Download **Verso-macOS.zip** from the [latest release](https://github.com/schneider-leon/verso/releases/latest)
+(universal build for Apple Silicon and Intel). Unzip it and move **Verso.app** to *Applications*.
 
-- **macOS** reports that Verso "is damaged" or "cannot be verified". Move Verso to
-  Applications, then run `xattr -cr /Applications/Verso.app` in Terminal once.
-- **Windows** SmartScreen shows "Windows protected your PC": click **More info → Run
-  anyway**.
+The app is not notarized by Apple, so macOS blocks the first launch with "Apple could not
+verify…". To allow it, do one of the following:
 
-You also need a TeX distribution with `latexmk`:
-[MacTeX](https://www.tug.org/mactex/) on macOS, [TeX Live](https://tug.org/texlive/) on
-Linux, [MiKTeX](https://miktex.org) or TeX Live on Windows (plus Perl for `latexmk`).
+- Open *System Settings → Privacy & Security*, scroll down and click **Open Anyway**, or
+- run this once in Terminal:
 
-## Quick start
-
-1. Start Verso — the welcome sheet checks your TeX installation.
-2. Click **Open sample project**, or **New Project** to start from a template, or
-   **Open Folder…** to use an existing LaTeX folder.
-3. Press `Cmd/Ctrl + Enter` to compile. Click into the PDF to jump to the source,
-   press `Cmd/Ctrl + Alt + →` to jump from the source to the PDF.
-
-`Cmd/Ctrl + Shift + P` opens the command palette with every command and its shortcut.
-
-## Documentation
-
-- [Getting started](docs/getting-started.md) — the everyday workflow in detail
-- [Keyboard shortcuts](docs/keyboard-shortcuts.md)
-- [Troubleshooting](docs/troubleshooting.md) — TeX not found, Biber, compile problems
-- [Editor themes](docs/themes.md)
-- [All documentation](docs/README.md), including architecture and development guides
+  ```bash
+  xattr -dr com.apple.quarantine /Applications/Verso.app
+  ```
 
 ## Build from source
 
 ```bash
-npm install
-npm run dev      # run the app in development mode
-npm test         # unit tests
-npm run dist     # build an installer for the current OS
+git clone https://github.com/schneider-leon/verso.git
+open verso/verso-macOS.xcodeproj
 ```
 
-Requires Node.js 22+. See [Development](docs/development.md) for all scripts and the test
-setup.
+In Xcode, select your own team under *Signing & Capabilities* (or "Sign to Run Locally").
+Then run the **verso-macOS** scheme (⌘R). The built app is called `Verso.app`.
 
-## Contributing
+The App Sandbox is disabled on purpose: `latexmk` and TeX need the login-shell `PATH`,
+`~/Library/texlive` and arbitrary project folders.
 
-Bug reports, ideas and pull requests are welcome — please read
-[CONTRIBUTING.md](CONTRIBUTING.md) first. Security issues: see [SECURITY.md](SECURITY.md).
+## Quick start
+
+1. Start Verso. The welcome sheet checks your TeX installation.
+2. Click **Open Sample Project**, **New Project** to start from a template, or
+   **Open Folder…** to use an existing LaTeX folder. You can also import a ZIP, e.g. from
+   Overleaf.
+3. Press `⌘↩` to compile. Press `⌥⌘→` to jump from the source to the PDF; `⌘`-click or
+   double-click in the PDF to jump back to the source.
+
+| Shortcut     | Action                 | Shortcut      | Action               |
+| ------------ | ---------------------- | ------------- | -------------------- |
+| `⌘↩`         | Compile                | `⌘P`          | Go to file           |
+| `⌥⌘↩`        | Recompile from scratch | `⌘R`          | Go to section        |
+| `⌥⌘→`        | Jump to PDF (SyncTeX)  | `⇧⌘P`         | Command palette      |
+| `⇧⌘C`        | Insert citation        | `⇧⌘F`         | Search in project    |
+| `⌘B` / `⌘I`  | Bold / italic          | `⇧⌘H`         | Version history      |
+| `⌘/`         | Toggle comment         | `⇧⌘E` / `⇧⌘D` | Toggle sidebar / PDF |
+
+## Compatibility with the Electron version
+
+- Projects are plain folders. `.openleaf/project.json` and the `.openleaf/build/` output
+  directory work exactly as in the original, so existing projects open unchanged.
+- App data lives in the same place, `~/Library/Application Support/Verso`. The project
+  list is imported on first launch, and existing version-history snapshots (gzip blobs
+  plus `index.json`) stay readable.
+- Templates, the completion catalogue (`latex-commands.json`) and the error explanations
+  (`latex-error-help.json`) are taken from the original.
+
+Not ported (yet): AI chat, Vim mode, visual (WYSIWYG) mode, math hover previews, custom
+editor themes and keybindings, focus mode, a detached PDF window and the crash-recovery
+sheet (autosave is on by default).
+
+## Architecture
+
+```
+verso-macOS/
+  App/        VersoApp (scenes, menus and shortcuts), AppModel (open project, dialogs)
+  Models/     AppSettings (UserDefaults), ProjectConfig / registry / templates,
+              Workspace (open project: tabs, autosave, compile, SyncTeX, index, file ops)
+  Services/   ProcessRunner (login-shell PATH, tools), CompileRunner (latexmk, cancel),
+              LatexParsers (log, SyncTeX, structure, BibTeX, texcount, line diff),
+              ProjectFiles (tree, IO, FSEvents watcher, ZIP), HistoryStore, GitService,
+              BibLookup (DOI / arXiv / ISBN), LatexData (completions, symbols)
+  Editor/     LatexTextView (NSTextView, TextKit 1), highlighter, line-number gutter,
+              completion popup, SwiftUI bridge
+  Views/      Dashboard, workspace layout, sidebar panels, PDF pane (PDFKit), dialogs
+  Resources/  templates (Templates.bundle), completion and error-help databases
+```
+
+| Original (Electron)                  | Native                                            |
+| ------------------------------------ | ------------------------------------------------- |
+| CodeMirror 6                         | `NSTextView` subclass + regex highlighter         |
+| pdf.js                               | PDFKit (`PDFView`)                                |
+| Node `child_process`                 | `Process` with argument arrays (no shell strings) |
+| chokidar                             | FSEvents                                          |
+| simple-git                           | system `git`                                      |
+| electron-store / zod settings        | `UserDefaults` / lenient `Codable`                |
+| IPC + zustand stores                 | `@Observable` models (`AppModel`, `Workspace`)    |
+| nspell dictionaries                  | macOS spell checker                               |
+
+## Security note
+
+Compiling runs `latexmk` in the project folder. A `.latexmkrc` file inside a project can
+execute arbitrary code, and so can `\write18` if you enable shell escape. Only compile
+projects from sources you trust, just as with any local TeX setup. Shell escape is off by
+default.
 
 ## Use of AI
 
@@ -102,11 +152,4 @@ Verso was developed with the help of AI coding assistants, including Claude Code
 
 ## License
 
-[MIT](LICENSE)
-
-The spellcheck dictionaries are third-party and are bundled unmodified, each with its
-license: English (SCOWL/Hunspell, MIT and BSD) and German (igerman98 by Björn Jacke,
-GPL-2.0 or GPL-3.0). They are installed from the npm packages
-[`dictionary-en`](https://github.com/wooorm/dictionaries/tree/main/dictionaries/en) and
-[`dictionary-de`](https://github.com/wooorm/dictionaries/tree/main/dictionaries/de),
-where their sources are available.
+[MIT](LICENSE), as in the original project.

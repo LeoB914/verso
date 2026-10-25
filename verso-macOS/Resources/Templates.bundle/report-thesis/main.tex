@@ -1,0 +1,27 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[backend=bibtex,style=authoryear]{biblatex}
+\usepackage{hyperref}
+
+\addbibresource{references.bib}
+
+\title{My Thesis}
+\author{My Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input{chapters/introduction}
+\input{chapters/method}
+\input{chapters/conclusion}
+
+\printbibliography
+
+\end{document}

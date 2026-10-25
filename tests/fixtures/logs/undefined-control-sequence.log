@@ -1,9 +1,0 @@
-This is pdfTeX, Version 3.141592653-1.40.25 (TeX Live 2024)
-(./main.tex
-LaTeX2e <2023-11-01>
-) (./sections/intro.tex
-./sections/intro.tex:12: Undefined control sequence.
-l.12 \brokencryptommand
-                        
-./main.tex:33: Undefined control sequence.
-l.33 \fakecommand{x}
